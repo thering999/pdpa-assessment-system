@@ -1,0 +1,4 @@
+Options -Indexes
+<IfModule mod_alias.c>
+  # no special rules yet
+</IfModule>

@@ -1,0 +1,200 @@
+/* Loading Indicator */
+#loading-spinner { display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.2); align-items:center; justify-content:center; }
+#loading-spinner .spinner { border:8px solid #eee; border-top:8px solid #3498db; border-radius:50%; width:60px; height:60px; animation:spin 1s linear infinite; }
+@keyframes spin { 100% { transform:rotate(360deg); } }
+
+/* Toast Notification */
+#toast { position:fixed; bottom:30px; right:30px; min-width:200px; background:#333; color:#fff; padding:16px 24px; border-radius:8px; opacity:0; pointer-events:none; z-index:9999; transition:opacity 0.3s; }
+#toast.show { opacity:1; pointer-events:auto; }
+
+/* Admin Sidebar */
+.admin-sidebar { width:220px; background:#222; color:#fff; min-height:100vh; position:fixed; left:0; top:0; padding:24px 0; }
+.admin-sidebar a { color:#fff; display:block; padding:12px 32px; text-decoration:none; }
+.admin-sidebar a:hover { background:#444; }
+.admin-content { margin-left:240px; padding:32px; }
+
+/* Dropdown */
+.dropdown { position:relative; display:inline-block; }
+.dropdown-content { display:none; position:absolute; background:#fff; min-width:160px; box-shadow:0 8px 16px rgba(0,0,0,0.2); z-index:1; }
+.dropdown:hover .dropdown-content { display:block; }
+.dropdown-content a { color:#222; padding:12px 16px; text-decoration:none; display:block; }
+.dropdown-content a:hover { background:#eee; }
+
+/* Dark Mode */
+body.dark { background:#181818; color:#eee; }
+body.dark .admin-sidebar { background:#111; }
+body.dark #toast { background:#222; color:#fff; }
+body.dark .dropdown-content { background:#222; color:#fff; }
+body.dark input, body.dark select, body.dark textarea { background:#222; color:#fff; border:1px solid #444; }
+.card canvas#catChart {
+	width: 100% !important;
+	max-width: 100%;
+	height: auto !important;
+	min-height: 120px;
+	display: block;
+	margin: 0 auto;
+}
+
+@media (max-width: 700px) {
+	.cat-summary-grid {
+		flex-direction: column;
+		gap: 10px;
+	}
+	.cat-card {
+		min-width: 0;
+		width: 100%;
+	}
+}
+/* Excel-style result page */
+.result-excel { background: #181f36; padding: 24px 20px; border-radius: 18px; box-shadow: 0 6px 24px rgba(0,0,0,.18); }
+.result-header-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; margin-bottom: 12px; }
+.objectives, .howto, .legend-bar, .score-summary { margin: 12px 0; background: #232a47; border-radius: 10px; padding: 12px 16px; }
+.objectives ol, .howto ul { margin: 8px 0 0 20px; }
+.legend-bar { background: #1a2140; }
+.legend-row { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; margin-top: 6px; }
+.legend-box { display: inline-block; width: 22px; height: 22px; border-radius: 6px; margin-right: 4px; vertical-align: middle; }
+.legend-box.green { background: #10b981; }
+.legend-box.yellow { background: #f59e0b; }
+.legend-box.red { background: #ef4444; }
+.score-summary { display: flex; align-items: center; gap: 32px; }
+.score-main { display: flex; flex-direction: column; align-items: center; }
+.score-label { font-size: 1.1rem; color: #c3cdf5; }
+.score-value { font-size: 2.5rem; font-weight: bold; margin: 2px 0; }
+.score-value.score-เขียว { color: #10b981; }
+.score-value.score-เหลือง { color: #f59e0b; }
+.score-value.score-แดง { color: #ef4444; }
+.score-color-label { font-size: 1.1rem; font-weight: bold; }
+.score-color-label.score-เขียว { color: #10b981; }
+.score-color-label.score-เหลือง { color: #f59e0b; }
+.score-color-label.score-แดง { color: #ef4444; }
+.cat-summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px; margin: 18px 0; }
+.cat-card { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; border-left: 8px solid #24314f; }
+.cat-card.cat-เขียว { border-color: #10b981; }
+.cat-card.cat-เหลือง { border-color: #f59e0b; }
+.cat-card.cat-แดง { border-color: #ef4444; }
+.cat-title { font-weight: bold; font-size: 1.1rem; }
+.cat-avg { font-size: 1.2rem; }
+.cat-color-label { font-weight: bold; font-size: 1.1rem; }
+.cat-color-label.cat-เขียว { background: #10b981; color: white; padding: 4px 8px; border-radius: 4px; }
+.cat-color-label.cat-เหลือง { background: #f59e0b; color: white; padding: 4px 8px; border-radius: 4px; }
+.cat-color-label.cat-แดง { background: #ef4444; color: white; padding: 4px 8px; border-radius: 4px; }
+
+/* Progress bars with Excel colors */
+.progress-fill.level-เขียว, .progress-fill.level-green { background: #10b981; }
+.progress-fill.level-เหลือง, .progress-fill.level-yellow { background: #f59e0b; }
+.progress-fill.level-แดง, .progress-fill.level-red { background: #ef4444; }
+
+/* Level indicators */
+.level.level-เขียว, .level.level-green { color: #10b981; font-weight: bold; }
+.level.level-เหลือง, .level.level-yellow { color: #f59e0b; font-weight: bold; }
+.level.level-แดง, .level.level-red { color: #ef4444; font-weight: bold; }
+:root{--bg:#0b1020;--fg:#e7eaf3;--muted:#a4acc3;--card:#151b2e;--primary:#4f7cff;--accent:#2dd4bf;--danger:#ef4444}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;background:var(--bg);color:var(--fg)}
+.container{max-width:900px;margin:0 auto;padding:16px}
+.card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.2);margin:16px 0}
+.btn{display:inline-block;padding:10px 16px;border-radius:8px;border:1px solid transparent;background:#2a3357;color:var(--fg);text-decoration:none}
+.btn.primary{background:var(--primary);color:#fff}
+.badge{background:#2a3357;color:#c3cdf5;padding:2px 8px;border-radius:999px;margin-left:8px;font-size:.8rem}
+.weight{color:var(--muted);margin-left:8px}
+.muted{color:var(--muted)}
+.small{font-size:.9rem}
+.q-item{padding:10px 8px;border-bottom:1px solid #24314f}
+.q-text{margin-bottom:8px}
+.score-choices{display:flex;gap:8px}
+.score-tile{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;border:2px solid #2a3357;background:#1a2140;color:#cbd5e1;cursor:pointer;user-select:none;transition:all .15s}
+.score-tile input{display:none}
+.score-tile span{font-weight:700}
+.score-tile.v1{border-color:#ef4444;color:#fecaca}
+.score-tile.v2{border-color:#f59e0b;color:#fde68a}
+.score-tile.v3{border-color:#10b981;color:#bbf7d0}
+.score-tile.active{background:#2a3357;box-shadow:0 0 0 3px rgba(79,124,255,.35) inset}
+.score-tile.v1.active{background:#3a0d0d}
+.score-tile.v2.active{background:#3a2a0d}
+.score-tile.v3.active{background:#0d3a2a}
+label{display:flex;gap:8px;align-items:flex-start}
+.actions{margin-top:12px}
+.score{font-size:1.2rem}
+.risk{font-size:1.1rem}
+.cat-summary-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+}
+.cat-card {
+	min-width: 220px;
+	flex: 1;
+	padding: 16px;
+	border-radius: 8px;
+	box-shadow: 0 2px 8px #0002;
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin-bottom: 8px;
+}
+.cat-title {
+	font-weight: bold;
+	font-size: 1.1em;
+	margin-bottom: 8px;
+}
+.cat-avg {
+	font-size: 1.2em;
+	margin-bottom: 6px;
+}
+.cat-color-label {
+	padding: 2px 10px;
+	border-radius: 6px;
+	color: #fff;
+	font-size: 0.95em;
+	margin-bottom: 8px;
+	text-transform: capitalize;
+}
+.cat-green { background: #2ecc40; }
+.cat-yellow { background: #ffdc00; color: #222; }
+.cat-red { background: #ff4136; }
+.legend-bar {
+	margin: 18px 0 12px 0;
+	padding: 10px 14px;
+	background: #f8f8f8;
+	border-radius: 8px;
+	font-size: 1em;
+}
+.legend-row {
+	display: flex;
+	gap: 18px;
+	align-items: center;
+	margin-top: 6px;
+}
+.legend-box {
+	display: inline-block;
+	width: 22px;
+	height: 22px;
+	border-radius: 4px;
+	margin-right: 6px;
+}
+.legend-box.green { background: #2ecc40; }
+.legend-box.yellow { background: #ffdc00; border: 1px solid #aaa; }
+.legend-box.red { background: #ff4136; }
+.objectives, .howto {
+	margin-bottom: 14px;
+	background: #f4f8ff;
+	border-left: 5px solid #2ecc40;
+	padding: 10px 18px;
+	border-radius: 8px;
+}
+.cat-docs {
+	margin-top: 8px;
+	font-size: 0.98em;
+}
+.cat-docs ul {
+	margin: 4px 0 0 0;
+	padding-left: 18px;
+}
+.cat-docs .btn {
+	font-size: 0.95em;
+	margin-right: 6px;
+}
+
+/* Contrast fixes for result page on light backgrounds */
+/* (removed) page-specific result overrides */

@@ -1,0 +1,43 @@
+# PDPA Assessment System - .gitignore
+
+# Composer dependencies
+/vendor/
+
+# Environment files
+.env
+.env.local
+
+# Log files
+*.log
+feedback.log
+
+# Temporary files
+/tmp/
+temp/
+
+# Uploaded files (optional - remove if you want to track uploads)
+/uploads/*
+!/uploads/.gitkeep
+
+# Cache files
+cache/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker volumes (if any)
+mysql_data/
+
+# Backup files
+*.backup
+*.bak
+
+# Composer lock (include if you want to lock versions)
+# composer.lock

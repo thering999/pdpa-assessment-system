@@ -1,0 +1,9 @@
+{
+  "name": "pdpa/assessment",
+  "description": "PDPA assessment webapp",
+  "type": "project",
+  "require": {
+    "phpoffice/phpspreadsheet": "^1.29",
+    "mpdf/mpdf": "^8.2"
+  }
+}
