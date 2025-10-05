@@ -269,7 +269,7 @@
 
    docker exec -it pdpa_mysql mysql -u root -p
 
-   # ตรวจสอบ database pdpa_db## Example FAQ/Help (Markdown)
+   # ตรวจสอบ database pdpa_system## Example FAQ/Help (Markdown)
 
    ```- `docs/faq.md` หรือ `views/faq.php`
 
