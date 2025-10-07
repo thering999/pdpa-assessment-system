@@ -64,13 +64,13 @@ $uid = (int)($me['id'] ?? 0);
   <div class="actions">
     <a class="btn" href="?">หน้าแรก</a> 
     <?php if (in_array($me['role'] ?? '', ['admin'])): ?>
-      <a class="btn" href="?a=admin_documents">ดูทั้งหมด (Admin)</a>
+    <a class="btn" href="?a=admin_documents">ดูรายการเอกสารทั้งหมด (ทั้งที่กำหนดและยังไม่กำหนด Reviewer)</a>
     <?php endif; ?>
   <p class="info-box" style="background:#e3f2fd;border-left:4px solid #2196f3;padding:12px;margin:12px 0;">
     <?php if ($me['role'] === 'admin'): ?>
       <strong style="color:#111">📋 Admin View: แสดงทุกเอกสารที่ผู้ใช้ส่งมาประเมิน (ทั้งที่ assign แล้วและยังไม่ assign) สามารถมอบหมาย reviewer ได้</strong>
     <?php else: ?>
-      <strong style="color:#111">📋 Reviewer View: แสดงเฉพาะเอกสารที่ Admin มอบหมายให้คุณ</strong>
+      <strong style="color:#111">📋 Reviewer View: แสดงงานที่ถูกมอบหมายให้คุณ และงานที่ยังไม่มีผู้รับงาน (คุณสามารถกด “รับงาน” ได้)</strong>
     <?php endif; ?>
   </p>
   
@@ -115,8 +115,8 @@ $uid = (int)($me['id'] ?? 0);
         <th>ไฟล์</th>
         <th>สถานะ</th>
         <th>ลำดับฉัน</th>
-        <th>ล่าสุดตรวจโดย</th>
-        <th>มอบหมาย Reviewer</th>
+  <th>ล่าสุดตรวจโดย</th>
+  <th><?= (($me['role'] ?? '') === 'admin') ? 'มอบหมาย Reviewer' : 'คิว Reviewer' ?></th>
         <th>Updated</th>
         <th>ดำเนินการ</th>
       </tr>
@@ -157,7 +157,7 @@ $uid = (int)($me['id'] ?? 0);
             }
           } catch (Throwable $e) { /* ignore */ }
         ?>
-        <tr <?= $myTurn ? 'style="background-color:#fff3cd;"' : '' ?>>
+  <tr <?= $myTurn ? 'class="row-myturn"' : '' ?>>
           <td><?= (int)$d['id'] ?></td>
           <td><?= htmlspecialchars($d['organization_name'] ?: $d['contact_email']) ?></td>
           <td><?= htmlspecialchars($d['category_name']) ?></td>
@@ -229,6 +229,7 @@ $uid = (int)($me['id'] ?? 0);
                   echo '<span class="muted">ยังไม่กำหนด</span>';
                 }
               ?>
+              <?php if (($me['role'] ?? '') === 'admin'): ?>
               <form method="post" action="?a=assign_reviewer" style="margin-top:6px;display:flex;gap:6px;align-items:center;">
                 <input type="hidden" name="doc_id" value="<?= (int)$d['id'] ?>">
                 <input type="hidden" name="form_token" value="<?= htmlspecialchars(form_token_issue()) ?>">
@@ -240,10 +241,10 @@ $uid = (int)($me['id'] ?? 0);
                   <?php endforeach; endif; ?>
                 </select>
                 <button class="btn" type="submit">มอบหมาย</button>
-                <?php if ($uid && $me['role'] === 'reviewer'): ?>
-                  <button class="btn btn-secondary" type="button" onclick="const sel=this.form.querySelector('select[name=reviewer_id]'); if(sel){ sel.value='<?= (int)$uid ?>'; this.form.submit(); }">มอบให้ฉัน</button>
-                <?php endif; ?>
               </form>
+              <?php else: ?>
+                <!-- Reviewer role: ไม่แสดงฟอร์มมอบหมาย ให้ดูคิวอย่างเดียว -->
+              <?php endif; ?>
             </div>
           </td>
           <td><?= htmlspecialchars($d['reviewed_at'] ?? $d['uploaded_at']) ?></td>
@@ -251,11 +252,11 @@ $uid = (int)($me['id'] ?? 0);
             <?php if ($me['role'] === 'admin'): ?>
               <!-- Admin สามารถตรวจทุกเอกสาร -->
               <a class="btn btn-primary" href="?a=doc_review&id=<?= (int)$d['id'] ?>">ตรวจ</a>
-            <?php elseif ($myTurn || !$list): ?>
-              <!-- Reviewer ตรวจได้เมื่อถึงลำดับหรือยังไม่มี reviewer -->
+            <?php elseif ($myTurn): ?>
+              <!-- Reviewer ตรวจได้เมื่อถึงลำดับ -->
               <a class="btn btn-primary" href="?a=doc_review&id=<?= (int)$d['id'] ?>">ตรวจ</a>
-            <?php elseif (!in_array($uid, $list, true) && $me['role'] === 'reviewer'): ?>
-              <!-- Reviewer สามารถรับงานได้ (ลบ status check ออก) -->
+            <?php elseif ((empty($list) || !in_array($uid, $list, true)) && $me['role'] === 'reviewer'): ?>
+              <!-- Reviewer สามารถรับงานได้เมื่อยังไม่มีคิว หรือยังไม่ได้อยู่ในคิว -->
               <form method="post" action="?a=assign_reviewer" style="display:inline;">
                 <input type="hidden" name="doc_id" value="<?= (int)$d['id'] ?>">
                 <input type="hidden" name="reviewer_id" value="<?= (int)$uid ?>">
@@ -268,7 +269,7 @@ $uid = (int)($me['id'] ?? 0);
                 <input type="hidden" name="doc_id" value="<?= (int)$d['id'] ?>">
                 <input type="hidden" name="reviewer_id" value="<?= (int)$uid ?>">
                 <input type="hidden" name="form_token" value="<?= htmlspecialchars(form_token_issue()) ?>">
-                <button class="btn btn-danger" type="submit">ไม่รับงาน</button>
+                <button class="btn btn-danger" type="submit" onclick="return confirm('ยืนยันไม่รับงานนี้? ระบบจะคืนงานให้ผู้ดูแลเพื่อจัดคิวใหม่');">ไม่รับงาน</button>
               </form>
             <?php else: ?>
               <a class="btn btn-secondary" href="?a=doc_review&id=<?= (int)$d['id'] ?>">ดู</a>

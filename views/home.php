@@ -1,15 +1,7 @@
-<section class="card">
-  <h2>แบบประเมินความพร้อม PDPA</h2>
-  <p>ตอบคำถามสั้น ๆ เพื่อประเมินระดับความเสี่ยงและความพร้อมด้านการคุ้มครองข้อมูลส่วนบุคคลขององค์กรของคุณ</p>
-  <?php if (!empty($_SESSION['user'])): ?>
-    <!-- ปุ่มสำหรับผู้ใช้ที่ล็อกอินแล้ว -->
-  <?php else: ?>
-    <a class="btn primary" href="?a=login">เข้าสู่ระบบเพื่อเริ่มประเมิน</a>
-    <a class="btn" href="?a=register">สมัครสมาชิก</a>
-  <?php endif; ?>
-</section>
+<?php include __DIR__.'/header.php'; ?>
+
 <div class="home-hero" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;background:linear-gradient(120deg,#e0e7ff 0%,#f0fdfa 100%);padding:48px 0;">
-  <img src="/assets/pdpa_logo.svg" alt="PDPA Logo" style="width:96px;height:96px;margin-bottom:16px;filter:drop-shadow(0 2px 8px #b3b3b3);">
+  <img src="/assets/logo_moph.png" alt="PDPA Logo" style="width:96px;height:96px;margin-bottom:16px;filter:drop-shadow(0 2px 8px #b3b3b3);">
   <h1 style="font-size:2.5rem;font-weight:700;margin-bottom:12px;color:#222;">PDPA Assessment System</h1>
   <p style="font-size:1.2rem;color:#444;max-width:480px;text-align:center;margin-bottom:32px;">
     ระบบประเมินความพร้อม PDPA สำหรับองค์กร <br>ใช้งานง่าย ครบทุกฟีเจอร์ <span style="color:#2563eb;font-weight:500;">(PHP + MySQL + Docker)</span>
@@ -36,14 +28,20 @@
   </div>
 </div>
 <style>
-.btn.primary { background:#2563eb;color:#fff;border:none;border-radius:6px;box-shadow:0 2px 8px #b3b3b3;transition:background 0.2s; }
-.btn.primary:hover { background:#1d4ed8; }
-.btn { display:inline-block; background:#fff; color:#2563eb; border:1px solid #2563eb; border-radius:6px; padding:10px 24px; text-decoration:none; font-weight:500; transition:background 0.2s,color 0.2s; }
-.btn:hover { background:#f0fdfa; color:#1d4ed8; }
+/* ปรับเฉพาะตัวอักษร ไม่ override ปุ่ม เพื่อให้สีปุ่มตรงกับเมนู */
 @media (max-width:600px) {
   .home-hero h1 { font-size:1.5rem; }
   .home-hero p { font-size:1rem; }
-  .btn, .btn.primary { font-size:1rem; padding:10px 16px; }
 }
 </style>
 </section>
+  <h2>แบบประเมินความพร้อม PDPA</h2>
+  <p>ตอบคำถามสั้น ๆ เพื่อประเมินระดับความเสี่ยงและความพร้อมด้านการคุ้มครองข้อมูลส่วนบุคคลขององค์กรของคุณ</p>
+  <?php if (!empty($_SESSION['user'])): ?>
+    <!-- ปุ่มสำหรับผู้ใช้ที่ล็อกอินแล้ว -->
+  <?php else: ?>
+    <a class="btn primary" href="?a=login">เข้าสู่ระบบเพื่อเริ่มประเมิน</a>
+    <a class="btn" href="?a=register">สมัครสมาชิก</a>
+  <?php endif; ?>
+</section>
+<?php include __DIR__.'/footer.php'; ?>

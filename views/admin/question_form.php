@@ -1,3 +1,4 @@
+<?php include __DIR__.'/../header.php'; ?>
 <?php $token = form_token_issue(); ?>
 <form method="post" action="?a=admin_save_q" class="card" style="max-width:760px;">
   <h2><?= isset($q) ? 'แก้ไขคำถาม' : 'เพิ่มคำถาม' ?></h2>
@@ -20,3 +21,4 @@
     <a class="btn" href="?a=admin">ยกเลิก</a>
   </div>
 </form>
+<?php include __DIR__.'/../footer.php'; ?>

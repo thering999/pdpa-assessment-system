@@ -63,15 +63,37 @@ function ensure_tables(): void {
         created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
 
+    // Track every role assignment event (who assigned what role when)
+    $pdo->exec("CREATE TABLE IF NOT EXISTS role_assignments (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT NOT NULL,
+        role ENUM('evaluator','reviewer','admin') NOT NULL,
+        assigned_by INT NULL,
+        assigned_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        INDEX(user_id),
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
+
     $pdo->exec("CREATE TABLE IF NOT EXISTS settings (
         skey VARCHAR(191) PRIMARY KEY,
         svalue TEXT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
 
+    // Attempt to migrate legacy role enum and values
+    try {
+        // Ensure enum has evaluator/reviewer/admin and default evaluator
+        $pdo->exec("ALTER TABLE users MODIFY COLUMN role ENUM('evaluator','reviewer','admin') NOT NULL DEFAULT 'evaluator'");
+    } catch (Throwable $e) { /* ignore if not needed */ }
+    try {
+        // Map legacy 'user' role to 'evaluator'
+        $pdo->exec("UPDATE users SET role='evaluator' WHERE role='user'");
+    } catch (Throwable $e) { /* ignore */ }
+
     $pdo->exec("CREATE TABLE IF NOT EXISTS assessments (
         id INT AUTO_INCREMENT PRIMARY KEY,
         started_at DATETIME NOT NULL,
         completed_at DATETIME NULL,
+        deleted_at DATETIME NULL,
         score FLOAT DEFAULT 0,
         risk_level VARCHAR(50) DEFAULT NULL,
         contact_email VARCHAR(255) DEFAULT NULL,
@@ -83,6 +105,7 @@ function ensure_tables(): void {
     // Ensure columns exist for legacy DBs
     ensure_column('assessments', 'assessor_name', "VARCHAR(255) DEFAULT NULL AFTER organization_name");
     ensure_column('assessments', 'org_status', "VARCHAR(100) DEFAULT NULL AFTER assessor_name");
+    ensure_column('assessments', 'deleted_at', 'DATETIME NULL AFTER completed_at');
 
     $pdo->exec("CREATE TABLE IF NOT EXISTS questions (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -118,6 +141,7 @@ function ensure_tables(): void {
         id INT AUTO_INCREMENT PRIMARY KEY,
         assessment_id INT NOT NULL,
         category_id INT NOT NULL,
+        question_id INT NULL,
         original_name VARCHAR(255) NOT NULL,
         stored_name VARCHAR(255) NOT NULL,
         mime VARCHAR(127) NULL,
@@ -130,16 +154,32 @@ function ensure_tables(): void {
         reviewers TEXT NULL,
         current_reviewer_idx INT DEFAULT 0,
         FOREIGN KEY (assessment_id) REFERENCES assessments(id) ON DELETE CASCADE,
-        FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
+        FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE,
+        FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE SET NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
+    
+    // Add question_id column if it doesn't exist (for existing installations)
+    ensure_column('documents', 'question_id', 'INT NULL AFTER category_id');
+    // Ensure review meta columns for legacy databases
+    ensure_column('documents', 'reviewed_by', 'INT NULL AFTER uploaded_at');
+    ensure_column('documents', 'reviewed_at', 'DATETIME NULL AFTER reviewed_by');
+    // Ensure reviewer workflow columns exist for older databases
+    ensure_column('documents', 'reviewers', "TEXT NULL AFTER reviewed_at");
+    ensure_column('documents', 'current_reviewer_idx', "INT DEFAULT 0 AFTER reviewers");
 
     $pdo->exec("CREATE TABLE IF NOT EXISTS notifications (
         id INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT,
         message TEXT,
+        document_id INT NULL,
+        event_type VARCHAR(50) NULL,
         is_read TINYINT(1) DEFAULT 0,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
+
+    // Backfill missing columns for notifications on legacy DBs
+    ensure_column('notifications', 'document_id', 'INT NULL AFTER user_id');
+    ensure_column('notifications', 'event_type', "VARCHAR(50) NULL AFTER message");
 
     $pdo->exec("CREATE TABLE IF NOT EXISTS log (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -166,6 +206,23 @@ function ensure_tables(): void {
             $hash = password_hash('admin1234', PASSWORD_BCRYPT);
             $st = $pdo->prepare('INSERT INTO users (username,email,password_hash,role) VALUES (?,?,?,\'admin\')');
             $st->execute(['admin','admin@example.com',$hash]);
+        }
+    } catch (Throwable $e) { /* ignore */ }
+    
+    // Seed sample reviewers if not exists
+    try {
+        $reviewerCount = (int)$pdo->query("SELECT COUNT(*) FROM users WHERE role='reviewer'")->fetchColumn();
+        if ($reviewerCount === 0) {
+            $reviewers = [
+                ['reviewer1', 'reviewer1@example.com', 'รีวิวเวอร์คนที่ 1'],
+                ['reviewer2', 'reviewer2@example.com', 'รีวิวเวอร์คนที่ 2'],
+                ['chief_reviewer', 'chief@example.com', 'หัวหน้ารีวิวเวอร์']
+            ];
+            $stmt = $pdo->prepare('INSERT INTO users (username,email,password_hash,role) VALUES (?,?,?,\'reviewer\')');
+            foreach ($reviewers as $r) {
+                $hash = password_hash('password123', PASSWORD_BCRYPT);
+                $stmt->execute([$r[0], $r[1], $hash]);
+            }
         }
     } catch (Throwable $e) { /* ignore */ }
 }
@@ -363,10 +420,11 @@ function calculate_score_and_level(int $assessment_id): array {
 }
 
 // --- Notifications helpers ---
-function add_notification(int $user_id, string $message): void {
+function add_notification(int $user_id, string $message, ?int $document_id = null, ?string $event_type = null): void {
     $pdo = db();
-    $stmt = $pdo->prepare("INSERT INTO notifications (user_id, message) VALUES (?, ?)");
-    $stmt->execute([$user_id, $message]);
+    // event_type example: 'doc_assigned','doc_reviewed','doc_uploaded'
+    $stmt = $pdo->prepare("INSERT INTO notifications (user_id, message, document_id, event_type) VALUES (?, ?, ?, ?)");
+    $stmt->execute([$user_id, $message, $document_id, $event_type]);
 }
 
 function get_user(int $id): ?array {
@@ -398,23 +456,112 @@ function add_log(?int $user_id, string $action, string $details): void {
     $stmt->execute([$user_id, $action, $details]);
 }
 
-// --- Document Workflow ---
-function update_document_status(int $doc_id, string $status, ?int $reviewer_id = null): void {
+// --- Role/Permission helpers ---
+
+function get_user_role(int $user_id): string {
     $pdo = db();
-    $stmt = $pdo->prepare("UPDATE documents SET status=?, reviewed_by=?, reviewed_at=NOW() WHERE id=?");
-    $stmt->execute([$status, $reviewer_id, $doc_id]);
+    $stmt = $pdo->prepare('SELECT role FROM users WHERE id = ?');
+    $stmt->execute([$user_id]);
+    $row = $stmt->fetch();
+    return $row ? ($row['role'] ?? 'evaluator') : 'evaluator';
 }
 
-function add_document_review_step(int $document_id, ?int $reviewer_id, string $action, ?string $notes): void {
+function assign_role(?int $admin_user_id, int $target_user_id, string $role): void {
+    $valid = ['evaluator','reviewer','admin'];
+    if (!in_array($role, $valid, true)) { $role = 'evaluator'; }
     $pdo = db();
-    $st = $pdo->prepare("INSERT INTO document_review_steps (document_id, reviewer_id, action, notes) VALUES (?,?,?,?)");
-    $st->execute([$document_id, $reviewer_id, $action, $notes]);
+    $pdo->beginTransaction();
+    try {
+        $pdo->prepare('UPDATE users SET role=? WHERE id=?')->execute([$role, $target_user_id]);
+        $pdo->prepare('INSERT INTO role_assignments (user_id, role, assigned_by) VALUES (?,?,?)')
+            ->execute([$target_user_id, $role, $admin_user_id]);
+        add_log($admin_user_id, 'assign_role', "Set role of user #{$target_user_id} to {$role}");
+        $pdo->commit();
+    } catch (Throwable $e) {
+        $pdo->rollBack();
+        throw $e;
+    }
 }
 
+// --- Document Review helpers ---
 function get_document_review_steps(int $document_id): array {
-    $st = db()->prepare('SELECT * FROM document_review_steps WHERE document_id = ? ORDER BY id');
+    $st = db()->prepare('
+        SELECT drs.*, u.username as reviewer_name 
+        FROM document_review_steps drs
+        LEFT JOIN users u ON drs.reviewer_id = u.id 
+        WHERE drs.document_id = ? 
+        ORDER BY drs.id ASC
+    ');
     $st->execute([$document_id]);
     return $st->fetchAll();
+}
+
+/**
+ * Update document status and manage multi-step reviewer flow.
+ * Rules:
+ * - If action PASS: advance current_reviewer_idx; if last reviewer passed -> status PASS.
+ * - If action FAIL: set status FAIL and do not advance.
+ * - If action COMMENT: keep status PENDING.
+ * Always appends a record to document_review_steps and sets reviewed_by/at.
+ */
+function update_document_status(int $document_id, string $action, ?int $reviewer_id = null, ?string $notes = null): void {
+    $pdo = db();
+    $allowed = ['PENDING','PASS','FAIL','COMMENT'];
+    if (!in_array($action, $allowed, true)) { $action = 'PENDING'; }
+    $pdo->beginTransaction();
+    try {
+        $doc = $pdo->prepare('SELECT id, status, reviewers, current_reviewer_idx FROM documents WHERE id=? FOR UPDATE');
+        $doc->execute([$document_id]);
+        $d = $doc->fetch();
+        if (!$d) { throw new RuntimeException('Document not found'); }
+        $reviewers = [];
+        if (!empty($d['reviewers'])) {
+            $tmp = json_decode((string)$d['reviewers'], true);
+            if (is_array($tmp)) { $reviewers = array_values(array_map('intval', $tmp)); }
+        }
+        $curIdx = (int)($d['current_reviewer_idx'] ?? 0);
+
+        // Log the step first
+        $pdo->prepare('INSERT INTO document_review_steps (document_id, reviewer_id, action, notes) VALUES (?,?,?,?)')
+            ->execute([$document_id, $reviewer_id, $action, $notes]);
+
+        $newStatus = $d['status'];
+        $newIdx = $curIdx;
+        if ($action === 'PASS') {
+            if (count($reviewers) > 0 && $curIdx < count($reviewers) - 1) {
+                $newIdx = $curIdx + 1; // advance to next reviewer
+                $newStatus = 'PENDING';
+            } else {
+                $newStatus = 'PASS'; // last reviewer approved
+            }
+        } elseif ($action === 'FAIL') {
+            $newStatus = 'FAIL';
+        } elseif ($action === 'COMMENT') {
+            $newStatus = 'PENDING';
+        } else { // PENDING
+            $newStatus = 'PENDING';
+        }
+
+        // อัปเดตสถานะ + ผู้ตรวจ + เวลาตรวจ ถ้ามีคอลัมน์ในฐานข้อมูล
+        try {
+            $upd = $pdo->prepare('UPDATE documents SET status=?, notes=COALESCE(NULLIF(?, ""), notes), reviewed_by=?, reviewed_at=NOW(), current_reviewer_idx=? WHERE id=?');
+            $upd->execute([$newStatus, (string)$notes, $reviewer_id, $newIdx, $document_id]);
+        } catch (Throwable $e) {
+            // Fallback: กรณีฐานข้อมูลเก่ายังไม่มีคอลัมน์ reviewed_by / reviewed_at
+            $msg = (string)$e->getMessage();
+            if (strpos($msg, 'Unknown column') !== false || $e->getCode() === '42S22') {
+                $upd2 = $pdo->prepare('UPDATE documents SET status=?, notes=COALESCE(NULLIF(?, ""), notes), current_reviewer_idx=? WHERE id=?');
+                $upd2->execute([$newStatus, (string)$notes, $newIdx, $document_id]);
+            } else {
+                throw $e;
+            }
+        }
+
+        $pdo->commit();
+    } catch (Throwable $e) {
+        $pdo->rollBack();
+        throw $e;
+    }
 }
 
 // ========================= CII Self-Assessment (D2) =========================

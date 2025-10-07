@@ -198,3 +198,51 @@ label{display:flex;gap:8px;align-items:flex-start}
 
 /* Contrast fixes for result page on light backgrounds */
 /* (removed) page-specific result overrides */
+
+/* Header navigation buttons (Home top menu) */
+header nav .btn{
+	background:#2c365f;            /* พื้นหลังเข้มอ่านง่ายบนพื้นหลังมืด */
+	color:#eef2ff;                  /* ตัวอักษรโทนอ่อน */
+	border:1px solid #4b67c2;       /* ขอบน้ำเงินอ่อน */
+	border-radius:12px;             /* มนมากขึ้นตามภาพตัวอย่าง */
+	padding:10px 18px;              /* ระยะห่างกว้างขึ้นเล็กน้อย */
+	box-shadow:0 3px 12px rgba(0,0,0,.25);
+	transition:all .15s ease;
+}
+header nav .btn:hover{
+	background:#344074;             /* โทนสว่างขึ้นเล็กน้อยเมื่อ hover */
+	transform:translateY(-1px);
+	box-shadow:0 6px 18px rgba(0,0,0,.3);
+}
+header nav .btn:active{
+	transform:translateY(0);
+	box-shadow:0 2px 8px rgba(0,0,0,.25) inset;
+}
+/* โหมดมืด: ปรับคอนทราสต์ให้สมดุล */
+body.dark header nav .btn{
+	background:#2b355c;
+	color:#eef2ff;
+	border-color:#5f7aff;
+}
+body.dark header nav .btn:hover{ background:#364177; }
+
+/* Home hero buttons use same style as header nav, but slightly larger */
+.home-hero .btn{
+	background:#2c365f;
+	color:#eef2ff;
+	border:1px solid #4b67c2;
+	border-radius:12px;
+	padding:12px 28px;
+	box-shadow:0 3px 12px rgba(0,0,0,.25);
+}
+.home-hero .btn.primary{ background:var(--primary); color:#fff; border-color:transparent; }
+.home-hero .btn:hover{ background:#344074; }
+
+/* Highlight row when it's my turn (dark theme friendly) */
+.row-myturn{
+	background: #2a2f46 !important;   /* พื้นหลังกรมเข้ม */
+}
+.row-myturn td{ color: #e8ecff; }    /* ตัวอักษรโทนอ่อนอ่านง่าย */
+.row-myturn a{ color:#b3c7ff; text-decoration: underline; }
+.row-myturn .badge{ background:#ffb84d !important; color:#222 !important; }
+.row-myturn small{ color:#f7e3a3; }

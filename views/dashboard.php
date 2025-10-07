@@ -1,13 +1,126 @@
+
+<?php include __DIR__.'/header.php'; ?>
 </style>
 
 <section class="card result-excel">
+  <?php 
+  $user_role = $user_role ?? 'evaluator';
+  if ($user_role === 'reviewer'): 
+  ?>
+  <h2>แดชบอร์ด Reviewer - ระบบตรวจสอบเอกสาร</h2>
+  <?php elseif ($user_role === 'admin'): ?>
+  <h2>แดชบอร์ด Admin - ระบบจัดการ PDPA</h2>
+  <?php else: ?>
   <h2>แดชบอร์ดผลการประเมินตามหัวข้อ (Self Assessment for CII)</h2>
+  <?php endif; ?>
   
   <?php if (isset($error)): ?>
     <div class="card" style="background:#fff3cd;border:1px solid #ffeaa7;color:#856404;padding:16px;margin:16px 0;">
       <p><?= htmlspecialchars($error) ?></p>
       <a class="btn" href="?a=start">เริ่มทำแบบประเมิน</a>
     </div>
+  <?php elseif ($user_role === 'reviewer'): ?>
+  
+  <!-- Reviewer Dashboard -->
+  <div class="card" style="margin-bottom:24px;">
+    <h3>สถิติงานตรวจสอบ</h3>
+    <?php 
+    $user_id = $_SESSION['user']['id'] ?? 0;
+    $pdo = db();
+    
+    // นับเอกสารทั้งหมดที่ reviewer คนนี้ถูก assign
+    $total_assigned = $pdo->prepare("
+      SELECT COUNT(*) as count FROM documents d 
+      WHERE (d.reviewers IS NOT NULL AND d.reviewers != '' AND d.reviewers LIKE ?)
+    ");
+    $needle = '%"'.((string)$user_id).'"%';
+    $total_assigned->execute([$needle]);
+    $assigned_count = $total_assigned->fetch()['count'];
+    
+    // นับเอกสารที่ reviewer คนนี้ตรวจเสร็จแล้ว (ผ่าน document_review_steps)
+    $total_reviewed = $pdo->prepare("
+      SELECT COUNT(DISTINCT document_id) as count FROM document_review_steps 
+      WHERE reviewer_id = ?
+    ");
+    $total_reviewed->execute([$user_id]);
+    $reviewed_count = $total_reviewed->fetch()['count'];
+    
+    // นับเอกสารที่ยังรอตรวจ และถึงลำดับ reviewer คนนี้แล้ว
+    $pending_my_turn = $pdo->prepare("
+      SELECT COUNT(*) as count FROM documents d 
+      WHERE d.status = 'PENDING' 
+      AND (d.reviewers IS NOT NULL AND d.reviewers != '' AND d.reviewers LIKE ?)
+      AND JSON_EXTRACT(d.reviewers, CONCAT('$[', IFNULL(d.current_reviewer_idx, 0), ']')) = ?
+    ");
+    $pending_my_turn->execute([$needle, $user_id]);
+    $pending_count = $pending_my_turn->fetch()['count'];
+    ?>
+    
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:16px;">
+      <div style="background:#e3f2fd;padding:20px;border-radius:8px;text-align:center;">
+        <h3 style="margin:0;color:#1976d2;"><?= $assigned_count ?></h3>
+        <p style="margin:8px 0 0 0;color:#666;">งานที่ได้รับมอบหมาย</p>
+      </div>
+      <div style="background:#f1f8e9;padding:20px;border-radius:8px;text-align:center;">
+        <h3 style="margin:0;color:#388e3c;"><?= $reviewed_count ?></h3>
+        <p style="margin:8px 0 0 0;color:#666;">งานที่ตรวจเสร็จแล้ว</p>
+      </div>
+      <div style="background:#fff3cd;padding:20px;border-radius:8px;text-align:center;">
+        <h3 style="margin:0;color:#856404;"><?= $pending_count ?></h3>
+        <p style="margin:8px 0 0 0;color:#666;">งานที่ถึงลำดับฉัน</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="card" style="margin-bottom:24px;">
+    <h3>เครื่องมือ Reviewer</h3>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a class="btn" href="?a=reviewer_documents">คิวงานตรวจสอบ</a>
+      <a class="btn" href="?a=history">ประวัติการตรวจ</a>
+      <a class="btn" href="?a=notifications">การแจ้งเตือน</a>
+    </div>
+  </div>
+  
+  <?php elseif ($user_role === 'admin'): ?>
+  
+  <!-- Admin Dashboard -->
+  <div class="card" style="margin-bottom:24px;">
+    <h3>สถิติระบบ</h3>
+    <?php 
+    $pdo = db();
+    
+    // Get system statistics
+    $total_users = $pdo->query("SELECT COUNT(*) as count FROM users")->fetch()['count'];
+    $total_assessments = $pdo->query("SELECT COUNT(*) as count FROM assessments")->fetch()['count'];
+    $pending_reviews = $pdo->query("SELECT COUNT(*) as count FROM documents WHERE status = 'PENDING'")->fetch()['count'];
+    ?>
+    
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:16px;">
+      <div style="background:#f8f9fa;padding:20px;border-radius:8px;text-align:center;">
+        <h3 style="margin:0;color:#007bff;"><?= $total_users ?></h3>
+        <p style="margin:8px 0 0 0;color:#666;">ผู้ใช้ทั้งหมด</p>
+      </div>
+      <div style="background:#d4edda;padding:20px;border-radius:8px;text-align:center;">
+        <h3 style="margin:0;color:#155724;"><?= $total_assessments ?></h3>
+        <p style="margin:8px 0 0 0;color:#666;">เอกสารทั้งหมด</p>
+      </div>
+      <div style="background:#fff3cd;padding:20px;border-radius:8px;text-align:center;">
+        <h3 style="margin:0;color:#856404;"><?= $pending_reviews ?></h3>
+        <p style="margin:8px 0 0 0;color:#666;">รอการตรวจ</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="card" style="margin-bottom:24px;">
+    <h3>เครื่องมือ Admin</h3>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a class="btn" href="?a=admin_users">จัดการผู้ใช้</a>
+      <a class="btn" href="?a=admin_documents">จัดการเอกสาร</a>
+      <a class="btn" href="?a=history">ประวัติทั้งหมด</a>
+      <a class="btn" href="?a=notifications">การแจ้งเตือน</a>
+    </div>
+  </div>
+  
   <?php else: ?>
   
   <div class="objectives card">
@@ -85,9 +198,54 @@
         </div>
       <?php endforeach; ?>
     </div>
+    
+    <!-- Reviewer Activity Section -->
+    <div class="card" style="margin-top:24px;">
+      <h3>ประวัติการตรวจสอบล่าสุด</h3>
+      <?php 
+      // Get recent reviewer activity for current user's assessments
+      $user_id = $_SESSION['user']['id'] ?? 0; // Fix: use correct session key
+      $pdo = db(); // Initialize PDO connection
+      $recent_reviews = $pdo->prepare("
+        SELECT drs.*, u.username as reviewer_name, d.id as doc_id, a.assessor_name
+        FROM document_review_steps drs
+        JOIN users u ON drs.reviewer_id = u.id
+        JOIN documents d ON drs.document_id = d.id
+        JOIN assessments a ON d.assessment_id = a.id
+        WHERE a.user_id = ?
+        ORDER BY drs.created_at DESC
+        LIMIT 5
+      ");
+      $recent_reviews->execute([$user_id]);
+      $reviews = $recent_reviews->fetchAll();
+      ?>
+      
+      <?php if (!empty($reviews)): ?>
+      <div style="margin-top:16px;">
+        <?php foreach($reviews as $review): ?>
+        <div style="padding:12px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <strong><?= htmlspecialchars($review['reviewer_name']) ?></strong>
+            <span style="margin:0 8px;color:#666;">•</span>
+            <?= htmlspecialchars($review['action']) ?>
+            <div style="font-size:0.9em;color:#666;margin-top:4px;">
+              <?= htmlspecialchars($review['created_at']) ?>
+            </div>
+          </div>
+          <div style="font-size:0.9em;color:#666;">
+            เอกสาร #<?= $review['doc_id'] ?>
+          </div>
+        </div>
+        <?php endforeach; ?>
+      </div>
+      <?php else: ?>
+      <p style="text-align:center;color:#666;padding:16px;">ยังไม่มีประวัติการตรวจสอบ</p>
+      <?php endif; ?>
+    </div>
   <?php endif; ?>
   <div class="actions" style="margin-top:12px;">
     <a class="btn" href="?a=result">ย้อนกลับ</a>
   </div>
   <?php endif; ?>
 </section>
+<?php include __DIR__.'/footer.php'; ?>

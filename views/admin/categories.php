@@ -1,3 +1,4 @@
+<?php include __DIR__.'/../header.php'; ?>
 <section class="card">
   <h2>หมวดหัวข้อประเมิน (Categories)</h2>
   <?php if (!empty($flash)): ?><p style="color:#2dd4bf;"><?= htmlspecialchars($flash) ?></p><?php endif; ?>
@@ -37,3 +38,4 @@
     <a class="btn" href="?a=admin">กลับ</a>
   </div>
 </section>
+<?php include __DIR__.'/../footer.php'; ?>

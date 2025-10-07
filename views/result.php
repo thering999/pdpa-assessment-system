@@ -38,6 +38,7 @@
       <div class="score-value score-<?= $level ?>"><?= $percent ?></div>
       <div class="score-color-label score-<?= $level ?>"><?= $level ?></div>
     </div>
+    <?php include __DIR__.'/header.php'; ?>
     <div class="score-desc">
       <span>เกณฑ์: 3 = มี, 2 = มีบางส่วน, 1 = ไม่มีเลย</span>
     </div>
@@ -59,7 +60,7 @@
     </div>
     <!-- ตารางผลประเมินแบบ Excel -->
     <div class="excel-table-wrap card" style="margin-top:24px;overflow-x:auto;">
-      <table class="excel-table" style="width:100%;border-collapse:collapse;">
+  <table class="table" style="width:100%;border-collapse:collapse;">
         <thead>
           <tr style="background:#f8f9fa; color:#111">
             <th>ลำดับ</th>
@@ -117,4 +118,6 @@
     <a class="btn" href="?a=export_excel" target="_blank">Export Excel</a>
     <a class="btn" href="?a=export_pdf" target="_blank">Export PDF</a>
   </div>
+
 </section>
+<?php include __DIR__.'/footer.php'; ?>

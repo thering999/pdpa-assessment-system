@@ -1,4 +1,5 @@
-<form method="post" action="?a=start_submit" class="card">
+<?php include __DIR__.'/header.php'; ?>
+<form method="post" action="?a=start_submit" class="card" style="max-width:720px;margin:0 auto;">
   <h2>เริ่มทำแบบประเมิน</h2>
   <?php if (!empty($error)): ?>
     <p class="muted" style="color:#ef4444;"><?= htmlspecialchars($error) ?></p>
@@ -26,3 +27,4 @@
     <a class="btn" href="?">ยกเลิก</a>
   </div>
 </form>
+<?php include __DIR__.'/footer.php'; ?>

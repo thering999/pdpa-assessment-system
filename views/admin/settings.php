@@ -1,3 +1,4 @@
+<?php include __DIR__.'/../header.php'; ?>
 <?php $token = form_token_issue(); ?>
 <form method="post" action="?a=admin_settings_save" class="card" style="max-width:560px;">
   <h2>ตั้งค่า</h2>
@@ -11,3 +12,4 @@
     <a class="btn" href="?a=admin">กลับ</a>
   </div>
 </form>
+<?php include __DIR__.'/../footer.php'; ?>

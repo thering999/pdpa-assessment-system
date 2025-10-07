@@ -1,3 +1,4 @@
+<?php include __DIR__.'/../header.php'; ?>
 <form method="post" action="?a=register_submit" class="card" style="max-width:520px;">
   <h2>สมัครสมาชิก</h2>
   <?php if (!empty($flash)): ?><p style="color:#2dd4bf;"><?= htmlspecialchars($flash) ?></p><?php endif; ?>
@@ -15,3 +16,4 @@
     <a class="btn" href="?a=login">เข้าสู่ระบบ</a>
   </div>
 </form>
+<?php include __DIR__.'/../footer.php'; ?>

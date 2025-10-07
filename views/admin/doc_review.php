@@ -1,3 +1,8 @@
+<?php include __DIR__.'/../header.php'; ?>
+<?php 
+  $me = $_SESSION['user'] ?? null; 
+  $backUrl = (isset($me['role']) && $me['role'] === 'reviewer') ? '?a=reviewer_documents' : '?a=admin';
+?>
 <?php if (!$doc): ?>
   <section class="card"><p>ไม่พบเอกสาร</p></section>
 <?php else: ?>
@@ -9,13 +14,35 @@
       $curIdx = (int)($doc['current_reviewer_idx'] ?? 0);
     ?>
     <?php if($reviewers): ?>
+      <?php
+        // Get reviewer names
+        $reviewerNames = [];
+        if (!empty($reviewers)) {
+          $placeholders = str_repeat('?,', count($reviewers) - 1) . '?';
+          $nameStmt = db()->prepare("SELECT id, username, email FROM users WHERE id IN ($placeholders)");
+          $nameStmt->execute($reviewers);
+          foreach ($nameStmt->fetchAll() as $u) {
+            $reviewerNames[(int)$u['id']] = ['username' => $u['username'], 'email' => $u['email']];
+          }
+        }
+      ?>
       <div class="muted" style="margin:8px 0;">
         ลำดับ Reviewer:
         <ol style="margin:6px 0 12px 20px;">
           <?php foreach($reviewers as $i=>$uid): ?>
-            <li>
-              ผู้รีวิว #<?=($i+1)?> (User ID: <?=$uid?>)
-              <?php if($i === $curIdx): ?><span class="badge">รอรีวิว</span><?php endif; ?>
+            <?php 
+              $info = $reviewerNames[(int)$uid] ?? null;
+              $name = $info ? $info['username'] : "User #{$uid}";
+              $email = $info ? $info['email'] : '';
+            ?>
+            <li style="margin-bottom:4px;">
+              <strong><?=$name?></strong>
+              <?php if($email): ?><small class="muted"> (<?=$email?>)</small><?php endif; ?>
+              <?php if($i === $curIdx): ?>
+                <span class="badge" style="background:#ff9800;color:white;padding:2px 6px;border-radius:3px;margin-left:6px;">รอรีวิว</span>
+              <?php elseif($i < $curIdx): ?>
+                <span class="badge" style="background:#4caf50;color:white;padding:2px 6px;border-radius:3px;margin-left:6px;">ผ่านแล้ว</span>
+              <?php endif; ?>
             </li>
           <?php endforeach; ?>
         </ol>
@@ -34,25 +61,14 @@
       </div>
     </div>
     <?php if($steps): ?>
-      <div style="margin:10px 0;">
-        <div style="font-size:13px;color:#666;">ไทม์ไลน์การรีวิว</div>
-        <ul style="list-style:none;padding:0;margin:6px 0;">
-          <?php foreach($steps as $s): ?>
-            <li style="padding:6px 8px;border:1px solid #eee;border-radius:6px;margin-bottom:6px;">
-              <strong><?=htmlspecialchars($s['action'])?></strong>
-              โดย User ID: <?= (int)$s['reviewer_id'] ?>
-              <small style="color:#666;"> (<?=htmlspecialchars($s['created_at'])?>)</small>
-              <?php if(!empty($s['notes'])): ?><div class="muted">หมายเหตุ: <?=nl2br(htmlspecialchars($s['notes']))?></div><?php endif; ?>
-            </li>
-          <?php endforeach; ?>
-        </ul>
-      </div>
+      <?php include __DIR__ . '/review_timeline.php'; ?>
     <?php endif; ?>
     <form method="post" action="?a=doc_review_save">
       <input type="hidden" name="id" value="<?= (int)$doc['id'] ?>" />
       <label>สถานะ
         <select name="status">
           <option value="PENDING" <?= $doc['status']==='PENDING'?'selected':'' ?>>รอตรวจสอบ</option>
+          <option value="COMMENT">ให้ความเห็นเพิ่มเติม</option>
           <option value="PASS" <?= $doc['status']==='PASS'?'selected':'' ?>>อนุมัติ</option>
           <option value="FAIL" <?= $doc['status']==='FAIL'?'selected':'' ?>>ไม่อนุมัติ(มีการแก้ไข)</option>
         </select>
@@ -62,8 +78,9 @@
       </label>
       <div class="actions" style="margin-top:12px;">
         <button class="btn primary" type="submit">บันทึกผล</button>
-        <a class="btn" href="?a=admin">กลับ</a>
+        <a class="btn" href="<?= $backUrl ?>">กลับ</a>
       </div>
     </form>
   </section>
 <?php endif; ?>
+<?php include __DIR__.'/../footer.php'; ?>

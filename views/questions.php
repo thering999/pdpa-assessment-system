@@ -1,3 +1,4 @@
+<?php include __DIR__.'/header.php'; ?>
 <?php $token = form_token_issue(); ?>
 
 <style>
@@ -432,6 +433,8 @@
                 <button class="submit-btn" type="submit">บันทึกคำตอบและดูผล</button>
             </div>
     </form>
+
+    <?php include __DIR__.'/footer.php'; ?>
 
     <script>
         // Tab switching

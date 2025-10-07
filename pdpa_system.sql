@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80043
 File Encoding         : 65001
 
-Date: 2025-10-05 16:55:43
+Date: 2025-10-07 10:08:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,7 +30,7 @@ CREATE TABLE `answers` (
   KEY `question_id` (`question_id`),
   CONSTRAINT `answers_ibfk_1` FOREIGN KEY (`assessment_id`) REFERENCES `assessments` (`id`) ON DELETE CASCADE,
   CONSTRAINT `answers_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=272 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=634 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of answers
@@ -240,6 +240,368 @@ INSERT INTO `answers` VALUES ('268', '14', '224', '0', '');
 INSERT INTO `answers` VALUES ('269', '14', '225', '0', '');
 INSERT INTO `answers` VALUES ('270', '14', '226', '0', '');
 INSERT INTO `answers` VALUES ('271', '14', '227', '0', '');
+INSERT INTO `answers` VALUES ('272', '18', '140', '1', null);
+INSERT INTO `answers` VALUES ('273', '18', '139', '2', null);
+INSERT INTO `answers` VALUES ('274', '18', '139', '3', null);
+INSERT INTO `answers` VALUES ('275', '18', '139', '2', null);
+INSERT INTO `answers` VALUES ('276', '18', '139', '1', null);
+INSERT INTO `answers` VALUES ('277', '18', '129', '1', null);
+INSERT INTO `answers` VALUES ('278', '18', '129', '0', '');
+INSERT INTO `answers` VALUES ('279', '18', '130', '2', null);
+INSERT INTO `answers` VALUES ('280', '18', '131', '2', null);
+INSERT INTO `answers` VALUES ('281', '18', '132', '3', null);
+INSERT INTO `answers` VALUES ('282', '18', '133', '2', null);
+INSERT INTO `answers` VALUES ('283', '18', '133', '1', null);
+INSERT INTO `answers` VALUES ('284', '18', '135', '2', null);
+INSERT INTO `answers` VALUES ('285', '18', '134', '1', null);
+INSERT INTO `answers` VALUES ('286', '18', '129', '1', null);
+INSERT INTO `answers` VALUES ('287', '18', '137', '1', null);
+INSERT INTO `answers` VALUES ('288', '18', '129', '1', '');
+INSERT INTO `answers` VALUES ('289', '18', '130', '2', '');
+INSERT INTO `answers` VALUES ('290', '18', '131', '2', '');
+INSERT INTO `answers` VALUES ('291', '18', '132', '3', '');
+INSERT INTO `answers` VALUES ('292', '18', '133', '1', '');
+INSERT INTO `answers` VALUES ('293', '18', '134', '1', '');
+INSERT INTO `answers` VALUES ('294', '18', '135', '2', '');
+INSERT INTO `answers` VALUES ('295', '18', '136', '0', '');
+INSERT INTO `answers` VALUES ('296', '18', '137', '1', '');
+INSERT INTO `answers` VALUES ('297', '18', '138', '0', '');
+INSERT INTO `answers` VALUES ('298', '18', '139', '1', '');
+INSERT INTO `answers` VALUES ('299', '18', '140', '1', '');
+INSERT INTO `answers` VALUES ('300', '18', '142', '0', '');
+INSERT INTO `answers` VALUES ('301', '18', '143', '0', '');
+INSERT INTO `answers` VALUES ('302', '18', '144', '0', '');
+INSERT INTO `answers` VALUES ('303', '18', '145', '0', '');
+INSERT INTO `answers` VALUES ('304', '18', '146', '0', '');
+INSERT INTO `answers` VALUES ('305', '18', '147', '0', '');
+INSERT INTO `answers` VALUES ('306', '18', '148', '0', '');
+INSERT INTO `answers` VALUES ('307', '18', '149', '0', '');
+INSERT INTO `answers` VALUES ('308', '18', '150', '0', '');
+INSERT INTO `answers` VALUES ('309', '18', '151', '0', '');
+INSERT INTO `answers` VALUES ('310', '18', '152', '0', '');
+INSERT INTO `answers` VALUES ('311', '18', '153', '0', '');
+INSERT INTO `answers` VALUES ('312', '18', '154', '0', '');
+INSERT INTO `answers` VALUES ('313', '18', '155', '0', '');
+INSERT INTO `answers` VALUES ('314', '18', '156', '0', '');
+INSERT INTO `answers` VALUES ('315', '18', '157', '0', '');
+INSERT INTO `answers` VALUES ('316', '18', '158', '0', '');
+INSERT INTO `answers` VALUES ('317', '18', '159', '0', '');
+INSERT INTO `answers` VALUES ('318', '18', '160', '0', '');
+INSERT INTO `answers` VALUES ('319', '18', '161', '0', '');
+INSERT INTO `answers` VALUES ('320', '18', '162', '0', '');
+INSERT INTO `answers` VALUES ('321', '18', '163', '0', '');
+INSERT INTO `answers` VALUES ('322', '18', '164', '0', '');
+INSERT INTO `answers` VALUES ('323', '18', '165', '0', '');
+INSERT INTO `answers` VALUES ('324', '18', '166', '0', '');
+INSERT INTO `answers` VALUES ('325', '18', '167', '0', '');
+INSERT INTO `answers` VALUES ('326', '18', '168', '0', '');
+INSERT INTO `answers` VALUES ('327', '18', '169', '0', '');
+INSERT INTO `answers` VALUES ('328', '18', '170', '0', '');
+INSERT INTO `answers` VALUES ('329', '18', '171', '0', '');
+INSERT INTO `answers` VALUES ('330', '18', '172', '0', '');
+INSERT INTO `answers` VALUES ('331', '18', '173', '0', '');
+INSERT INTO `answers` VALUES ('332', '18', '174', '0', '');
+INSERT INTO `answers` VALUES ('333', '18', '175', '0', '');
+INSERT INTO `answers` VALUES ('334', '18', '176', '0', '');
+INSERT INTO `answers` VALUES ('335', '18', '177', '0', '');
+INSERT INTO `answers` VALUES ('336', '18', '178', '0', '');
+INSERT INTO `answers` VALUES ('337', '18', '179', '0', '');
+INSERT INTO `answers` VALUES ('338', '18', '180', '0', '');
+INSERT INTO `answers` VALUES ('339', '18', '181', '0', '');
+INSERT INTO `answers` VALUES ('340', '18', '182', '0', '');
+INSERT INTO `answers` VALUES ('341', '18', '183', '0', '');
+INSERT INTO `answers` VALUES ('342', '18', '184', '0', '');
+INSERT INTO `answers` VALUES ('343', '18', '185', '0', '');
+INSERT INTO `answers` VALUES ('344', '18', '186', '0', '');
+INSERT INTO `answers` VALUES ('345', '18', '187', '0', '');
+INSERT INTO `answers` VALUES ('346', '18', '188', '0', '');
+INSERT INTO `answers` VALUES ('347', '18', '189', '0', '');
+INSERT INTO `answers` VALUES ('348', '18', '190', '0', '');
+INSERT INTO `answers` VALUES ('349', '18', '191', '0', '');
+INSERT INTO `answers` VALUES ('350', '18', '192', '0', '');
+INSERT INTO `answers` VALUES ('351', '18', '193', '0', '');
+INSERT INTO `answers` VALUES ('352', '18', '194', '0', '');
+INSERT INTO `answers` VALUES ('353', '18', '195', '0', '');
+INSERT INTO `answers` VALUES ('354', '18', '196', '0', '');
+INSERT INTO `answers` VALUES ('355', '18', '197', '0', '');
+INSERT INTO `answers` VALUES ('356', '18', '198', '0', '');
+INSERT INTO `answers` VALUES ('357', '18', '199', '0', '');
+INSERT INTO `answers` VALUES ('358', '18', '200', '0', '');
+INSERT INTO `answers` VALUES ('359', '18', '201', '0', '');
+INSERT INTO `answers` VALUES ('360', '18', '202', '0', '');
+INSERT INTO `answers` VALUES ('361', '18', '203', '0', '');
+INSERT INTO `answers` VALUES ('362', '18', '204', '0', '');
+INSERT INTO `answers` VALUES ('363', '18', '205', '0', '');
+INSERT INTO `answers` VALUES ('364', '18', '206', '0', '');
+INSERT INTO `answers` VALUES ('365', '18', '207', '0', '');
+INSERT INTO `answers` VALUES ('366', '18', '208', '0', '');
+INSERT INTO `answers` VALUES ('367', '18', '209', '0', '');
+INSERT INTO `answers` VALUES ('368', '18', '210', '0', '');
+INSERT INTO `answers` VALUES ('369', '18', '211', '0', '');
+INSERT INTO `answers` VALUES ('370', '18', '212', '0', '');
+INSERT INTO `answers` VALUES ('371', '18', '213', '0', '');
+INSERT INTO `answers` VALUES ('372', '18', '214', '0', '');
+INSERT INTO `answers` VALUES ('373', '18', '215', '0', '');
+INSERT INTO `answers` VALUES ('374', '18', '216', '0', '');
+INSERT INTO `answers` VALUES ('375', '18', '217', '0', '');
+INSERT INTO `answers` VALUES ('376', '18', '218', '0', '');
+INSERT INTO `answers` VALUES ('377', '18', '219', '0', '');
+INSERT INTO `answers` VALUES ('378', '18', '220', '0', '');
+INSERT INTO `answers` VALUES ('379', '18', '221', '0', '');
+INSERT INTO `answers` VALUES ('380', '18', '222', '0', '');
+INSERT INTO `answers` VALUES ('381', '18', '223', '0', '');
+INSERT INTO `answers` VALUES ('382', '18', '224', '0', '');
+INSERT INTO `answers` VALUES ('383', '18', '225', '0', '');
+INSERT INTO `answers` VALUES ('384', '18', '226', '0', '');
+INSERT INTO `answers` VALUES ('385', '18', '227', '0', '');
+INSERT INTO `answers` VALUES ('386', '19', '129', '1', null);
+INSERT INTO `answers` VALUES ('387', '19', '129', '2', null);
+INSERT INTO `answers` VALUES ('388', '19', '130', '2', null);
+INSERT INTO `answers` VALUES ('389', '19', '131', '3', null);
+INSERT INTO `answers` VALUES ('390', '19', '132', '2', null);
+INSERT INTO `answers` VALUES ('391', '19', '133', '2', null);
+INSERT INTO `answers` VALUES ('392', '19', '134', '3', null);
+INSERT INTO `answers` VALUES ('393', '19', '135', '3', null);
+INSERT INTO `answers` VALUES ('394', '19', '136', '2', null);
+INSERT INTO `answers` VALUES ('395', '19', '137', '3', null);
+INSERT INTO `answers` VALUES ('396', '19', '138', '3', null);
+INSERT INTO `answers` VALUES ('397', '19', '139', '3', null);
+INSERT INTO `answers` VALUES ('398', '19', '140', '3', null);
+INSERT INTO `answers` VALUES ('399', '19', '142', '2', null);
+INSERT INTO `answers` VALUES ('400', '19', '143', '2', null);
+INSERT INTO `answers` VALUES ('401', '19', '144', '2', null);
+INSERT INTO `answers` VALUES ('402', '19', '146', '2', null);
+INSERT INTO `answers` VALUES ('403', '19', '147', '2', null);
+INSERT INTO `answers` VALUES ('404', '19', '149', '3', null);
+INSERT INTO `answers` VALUES ('405', '19', '148', '3', null);
+INSERT INTO `answers` VALUES ('406', '19', '150', '3', null);
+INSERT INTO `answers` VALUES ('407', '19', '151', '3', null);
+INSERT INTO `answers` VALUES ('408', '19', '153', '3', null);
+INSERT INTO `answers` VALUES ('409', '19', '154', '3', null);
+INSERT INTO `answers` VALUES ('410', '19', '155', '2', null);
+INSERT INTO `answers` VALUES ('411', '19', '156', '2', null);
+INSERT INTO `answers` VALUES ('412', '19', '157', '2', null);
+INSERT INTO `answers` VALUES ('413', '19', '159', '2', null);
+INSERT INTO `answers` VALUES ('414', '19', '158', '3', null);
+INSERT INTO `answers` VALUES ('415', '19', '160', '2', null);
+INSERT INTO `answers` VALUES ('416', '19', '161', '2', null);
+INSERT INTO `answers` VALUES ('417', '19', '162', '2', null);
+INSERT INTO `answers` VALUES ('418', '19', '163', '3', null);
+INSERT INTO `answers` VALUES ('419', '19', '165', '3', null);
+INSERT INTO `answers` VALUES ('420', '19', '166', '2', null);
+INSERT INTO `answers` VALUES ('421', '19', '167', '2', null);
+INSERT INTO `answers` VALUES ('422', '19', '169', '2', null);
+INSERT INTO `answers` VALUES ('423', '19', '171', '2', null);
+INSERT INTO `answers` VALUES ('424', '19', '170', '2', null);
+INSERT INTO `answers` VALUES ('425', '19', '129', '2', '');
+INSERT INTO `answers` VALUES ('426', '19', '130', '2', '');
+INSERT INTO `answers` VALUES ('427', '19', '131', '3', '');
+INSERT INTO `answers` VALUES ('428', '19', '132', '2', '');
+INSERT INTO `answers` VALUES ('429', '19', '133', '2', '');
+INSERT INTO `answers` VALUES ('430', '19', '134', '3', '');
+INSERT INTO `answers` VALUES ('431', '19', '135', '3', '');
+INSERT INTO `answers` VALUES ('432', '19', '136', '2', '');
+INSERT INTO `answers` VALUES ('433', '19', '137', '3', '');
+INSERT INTO `answers` VALUES ('434', '19', '138', '3', '');
+INSERT INTO `answers` VALUES ('435', '19', '139', '3', '');
+INSERT INTO `answers` VALUES ('436', '19', '140', '3', '');
+INSERT INTO `answers` VALUES ('437', '19', '142', '2', '');
+INSERT INTO `answers` VALUES ('438', '19', '143', '2', '');
+INSERT INTO `answers` VALUES ('439', '19', '144', '2', '');
+INSERT INTO `answers` VALUES ('440', '19', '145', '0', '');
+INSERT INTO `answers` VALUES ('441', '19', '146', '2', '');
+INSERT INTO `answers` VALUES ('442', '19', '147', '2', '');
+INSERT INTO `answers` VALUES ('443', '19', '148', '3', '');
+INSERT INTO `answers` VALUES ('444', '19', '149', '3', '');
+INSERT INTO `answers` VALUES ('445', '19', '150', '3', '');
+INSERT INTO `answers` VALUES ('446', '19', '151', '3', '');
+INSERT INTO `answers` VALUES ('447', '19', '152', '0', '');
+INSERT INTO `answers` VALUES ('448', '19', '153', '3', '');
+INSERT INTO `answers` VALUES ('449', '19', '154', '3', '');
+INSERT INTO `answers` VALUES ('450', '19', '155', '2', '');
+INSERT INTO `answers` VALUES ('451', '19', '156', '2', '');
+INSERT INTO `answers` VALUES ('452', '19', '157', '2', '');
+INSERT INTO `answers` VALUES ('453', '19', '158', '3', '');
+INSERT INTO `answers` VALUES ('454', '19', '159', '2', '');
+INSERT INTO `answers` VALUES ('455', '19', '160', '2', '');
+INSERT INTO `answers` VALUES ('456', '19', '161', '2', '');
+INSERT INTO `answers` VALUES ('457', '19', '162', '2', '');
+INSERT INTO `answers` VALUES ('458', '19', '163', '3', '');
+INSERT INTO `answers` VALUES ('459', '19', '164', '0', '');
+INSERT INTO `answers` VALUES ('460', '19', '165', '3', '');
+INSERT INTO `answers` VALUES ('461', '19', '166', '2', '');
+INSERT INTO `answers` VALUES ('462', '19', '167', '2', '');
+INSERT INTO `answers` VALUES ('463', '19', '168', '0', '');
+INSERT INTO `answers` VALUES ('464', '19', '169', '2', '');
+INSERT INTO `answers` VALUES ('465', '19', '170', '2', '');
+INSERT INTO `answers` VALUES ('466', '19', '171', '2', '');
+INSERT INTO `answers` VALUES ('467', '19', '172', '0', '');
+INSERT INTO `answers` VALUES ('468', '19', '173', '0', '');
+INSERT INTO `answers` VALUES ('469', '19', '174', '0', '');
+INSERT INTO `answers` VALUES ('470', '19', '175', '0', '');
+INSERT INTO `answers` VALUES ('471', '19', '176', '0', '');
+INSERT INTO `answers` VALUES ('472', '19', '177', '0', '');
+INSERT INTO `answers` VALUES ('473', '19', '178', '0', '');
+INSERT INTO `answers` VALUES ('474', '19', '179', '0', '');
+INSERT INTO `answers` VALUES ('475', '19', '180', '0', '');
+INSERT INTO `answers` VALUES ('476', '19', '181', '0', '');
+INSERT INTO `answers` VALUES ('477', '19', '182', '0', '');
+INSERT INTO `answers` VALUES ('478', '19', '183', '0', '');
+INSERT INTO `answers` VALUES ('479', '19', '184', '0', '');
+INSERT INTO `answers` VALUES ('480', '19', '185', '0', '');
+INSERT INTO `answers` VALUES ('481', '19', '186', '0', '');
+INSERT INTO `answers` VALUES ('482', '19', '187', '0', '');
+INSERT INTO `answers` VALUES ('483', '19', '188', '0', '');
+INSERT INTO `answers` VALUES ('484', '19', '189', '0', '');
+INSERT INTO `answers` VALUES ('485', '19', '190', '0', '');
+INSERT INTO `answers` VALUES ('486', '19', '191', '0', '');
+INSERT INTO `answers` VALUES ('487', '19', '192', '0', '');
+INSERT INTO `answers` VALUES ('488', '19', '193', '0', '');
+INSERT INTO `answers` VALUES ('489', '19', '194', '0', '');
+INSERT INTO `answers` VALUES ('490', '19', '195', '0', '');
+INSERT INTO `answers` VALUES ('491', '19', '196', '0', '');
+INSERT INTO `answers` VALUES ('492', '19', '197', '0', '');
+INSERT INTO `answers` VALUES ('493', '19', '198', '0', '');
+INSERT INTO `answers` VALUES ('494', '19', '199', '0', '');
+INSERT INTO `answers` VALUES ('495', '19', '200', '0', '');
+INSERT INTO `answers` VALUES ('496', '19', '201', '0', '');
+INSERT INTO `answers` VALUES ('497', '19', '202', '0', '');
+INSERT INTO `answers` VALUES ('498', '19', '203', '0', '');
+INSERT INTO `answers` VALUES ('499', '19', '204', '0', '');
+INSERT INTO `answers` VALUES ('500', '19', '205', '0', '');
+INSERT INTO `answers` VALUES ('501', '19', '206', '0', '');
+INSERT INTO `answers` VALUES ('502', '19', '207', '0', '');
+INSERT INTO `answers` VALUES ('503', '19', '208', '0', '');
+INSERT INTO `answers` VALUES ('504', '19', '209', '0', '');
+INSERT INTO `answers` VALUES ('505', '19', '210', '0', '');
+INSERT INTO `answers` VALUES ('506', '19', '211', '0', '');
+INSERT INTO `answers` VALUES ('507', '19', '212', '0', '');
+INSERT INTO `answers` VALUES ('508', '19', '213', '0', '');
+INSERT INTO `answers` VALUES ('509', '19', '214', '0', '');
+INSERT INTO `answers` VALUES ('510', '19', '215', '0', '');
+INSERT INTO `answers` VALUES ('511', '19', '216', '0', '');
+INSERT INTO `answers` VALUES ('512', '19', '217', '0', '');
+INSERT INTO `answers` VALUES ('513', '19', '218', '0', '');
+INSERT INTO `answers` VALUES ('514', '19', '219', '0', '');
+INSERT INTO `answers` VALUES ('515', '19', '220', '0', '');
+INSERT INTO `answers` VALUES ('516', '19', '221', '0', '');
+INSERT INTO `answers` VALUES ('517', '19', '222', '0', '');
+INSERT INTO `answers` VALUES ('518', '19', '223', '0', '');
+INSERT INTO `answers` VALUES ('519', '19', '224', '0', '');
+INSERT INTO `answers` VALUES ('520', '19', '225', '0', '');
+INSERT INTO `answers` VALUES ('521', '19', '226', '0', '');
+INSERT INTO `answers` VALUES ('522', '19', '227', '0', '');
+INSERT INTO `answers` VALUES ('523', '20', '129', '1', null);
+INSERT INTO `answers` VALUES ('524', '20', '129', '2', null);
+INSERT INTO `answers` VALUES ('525', '20', '130', '2', null);
+INSERT INTO `answers` VALUES ('526', '20', '131', '2', null);
+INSERT INTO `answers` VALUES ('527', '20', '132', '3', null);
+INSERT INTO `answers` VALUES ('528', '20', '133', '3', null);
+INSERT INTO `answers` VALUES ('529', '20', '134', '2', null);
+INSERT INTO `answers` VALUES ('530', '20', '135', '2', null);
+INSERT INTO `answers` VALUES ('531', '20', '136', '3', null);
+INSERT INTO `answers` VALUES ('532', '20', '137', '2', null);
+INSERT INTO `answers` VALUES ('533', '20', '138', '3', null);
+INSERT INTO `answers` VALUES ('534', '20', '139', '2', null);
+INSERT INTO `answers` VALUES ('535', '20', '140', '2', null);
+INSERT INTO `answers` VALUES ('536', '20', '129', '2', '');
+INSERT INTO `answers` VALUES ('537', '20', '130', '2', '');
+INSERT INTO `answers` VALUES ('538', '20', '131', '2', '');
+INSERT INTO `answers` VALUES ('539', '20', '132', '3', '');
+INSERT INTO `answers` VALUES ('540', '20', '133', '3', '');
+INSERT INTO `answers` VALUES ('541', '20', '134', '2', '');
+INSERT INTO `answers` VALUES ('542', '20', '135', '2', '');
+INSERT INTO `answers` VALUES ('543', '20', '136', '3', '');
+INSERT INTO `answers` VALUES ('544', '20', '137', '2', '');
+INSERT INTO `answers` VALUES ('545', '20', '138', '3', '');
+INSERT INTO `answers` VALUES ('546', '20', '139', '2', '');
+INSERT INTO `answers` VALUES ('547', '20', '140', '2', '');
+INSERT INTO `answers` VALUES ('548', '20', '142', '0', '');
+INSERT INTO `answers` VALUES ('549', '20', '143', '0', '');
+INSERT INTO `answers` VALUES ('550', '20', '144', '0', '');
+INSERT INTO `answers` VALUES ('551', '20', '145', '0', '');
+INSERT INTO `answers` VALUES ('552', '20', '146', '0', '');
+INSERT INTO `answers` VALUES ('553', '20', '147', '0', '');
+INSERT INTO `answers` VALUES ('554', '20', '148', '0', '');
+INSERT INTO `answers` VALUES ('555', '20', '149', '0', '');
+INSERT INTO `answers` VALUES ('556', '20', '150', '0', '');
+INSERT INTO `answers` VALUES ('557', '20', '151', '0', '');
+INSERT INTO `answers` VALUES ('558', '20', '152', '0', '');
+INSERT INTO `answers` VALUES ('559', '20', '153', '0', '');
+INSERT INTO `answers` VALUES ('560', '20', '154', '0', '');
+INSERT INTO `answers` VALUES ('561', '20', '155', '0', '');
+INSERT INTO `answers` VALUES ('562', '20', '156', '0', '');
+INSERT INTO `answers` VALUES ('563', '20', '157', '0', '');
+INSERT INTO `answers` VALUES ('564', '20', '158', '0', '');
+INSERT INTO `answers` VALUES ('565', '20', '159', '0', '');
+INSERT INTO `answers` VALUES ('566', '20', '160', '0', '');
+INSERT INTO `answers` VALUES ('567', '20', '161', '0', '');
+INSERT INTO `answers` VALUES ('568', '20', '162', '0', '');
+INSERT INTO `answers` VALUES ('569', '20', '163', '0', '');
+INSERT INTO `answers` VALUES ('570', '20', '164', '0', '');
+INSERT INTO `answers` VALUES ('571', '20', '165', '0', '');
+INSERT INTO `answers` VALUES ('572', '20', '166', '0', '');
+INSERT INTO `answers` VALUES ('573', '20', '167', '0', '');
+INSERT INTO `answers` VALUES ('574', '20', '168', '0', '');
+INSERT INTO `answers` VALUES ('575', '20', '169', '0', '');
+INSERT INTO `answers` VALUES ('576', '20', '170', '0', '');
+INSERT INTO `answers` VALUES ('577', '20', '171', '0', '');
+INSERT INTO `answers` VALUES ('578', '20', '172', '0', '');
+INSERT INTO `answers` VALUES ('579', '20', '173', '0', '');
+INSERT INTO `answers` VALUES ('580', '20', '174', '0', '');
+INSERT INTO `answers` VALUES ('581', '20', '175', '0', '');
+INSERT INTO `answers` VALUES ('582', '20', '176', '0', '');
+INSERT INTO `answers` VALUES ('583', '20', '177', '0', '');
+INSERT INTO `answers` VALUES ('584', '20', '178', '0', '');
+INSERT INTO `answers` VALUES ('585', '20', '179', '0', '');
+INSERT INTO `answers` VALUES ('586', '20', '180', '0', '');
+INSERT INTO `answers` VALUES ('587', '20', '181', '0', '');
+INSERT INTO `answers` VALUES ('588', '20', '182', '0', '');
+INSERT INTO `answers` VALUES ('589', '20', '183', '0', '');
+INSERT INTO `answers` VALUES ('590', '20', '184', '0', '');
+INSERT INTO `answers` VALUES ('591', '20', '185', '0', '');
+INSERT INTO `answers` VALUES ('592', '20', '186', '0', '');
+INSERT INTO `answers` VALUES ('593', '20', '187', '0', '');
+INSERT INTO `answers` VALUES ('594', '20', '188', '0', '');
+INSERT INTO `answers` VALUES ('595', '20', '189', '0', '');
+INSERT INTO `answers` VALUES ('596', '20', '190', '0', '');
+INSERT INTO `answers` VALUES ('597', '20', '191', '0', '');
+INSERT INTO `answers` VALUES ('598', '20', '192', '0', '');
+INSERT INTO `answers` VALUES ('599', '20', '193', '0', '');
+INSERT INTO `answers` VALUES ('600', '20', '194', '0', '');
+INSERT INTO `answers` VALUES ('601', '20', '195', '0', '');
+INSERT INTO `answers` VALUES ('602', '20', '196', '0', '');
+INSERT INTO `answers` VALUES ('603', '20', '197', '0', '');
+INSERT INTO `answers` VALUES ('604', '20', '198', '0', '');
+INSERT INTO `answers` VALUES ('605', '20', '199', '0', '');
+INSERT INTO `answers` VALUES ('606', '20', '200', '0', '');
+INSERT INTO `answers` VALUES ('607', '20', '201', '0', '');
+INSERT INTO `answers` VALUES ('608', '20', '202', '0', '');
+INSERT INTO `answers` VALUES ('609', '20', '203', '0', '');
+INSERT INTO `answers` VALUES ('610', '20', '204', '0', '');
+INSERT INTO `answers` VALUES ('611', '20', '205', '0', '');
+INSERT INTO `answers` VALUES ('612', '20', '206', '0', '');
+INSERT INTO `answers` VALUES ('613', '20', '207', '0', '');
+INSERT INTO `answers` VALUES ('614', '20', '208', '0', '');
+INSERT INTO `answers` VALUES ('615', '20', '209', '0', '');
+INSERT INTO `answers` VALUES ('616', '20', '210', '0', '');
+INSERT INTO `answers` VALUES ('617', '20', '211', '0', '');
+INSERT INTO `answers` VALUES ('618', '20', '212', '0', '');
+INSERT INTO `answers` VALUES ('619', '20', '213', '0', '');
+INSERT INTO `answers` VALUES ('620', '20', '214', '0', '');
+INSERT INTO `answers` VALUES ('621', '20', '215', '0', '');
+INSERT INTO `answers` VALUES ('622', '20', '216', '0', '');
+INSERT INTO `answers` VALUES ('623', '20', '217', '0', '');
+INSERT INTO `answers` VALUES ('624', '20', '218', '0', '');
+INSERT INTO `answers` VALUES ('625', '20', '219', '0', '');
+INSERT INTO `answers` VALUES ('626', '20', '220', '0', '');
+INSERT INTO `answers` VALUES ('627', '20', '221', '0', '');
+INSERT INTO `answers` VALUES ('628', '20', '222', '0', '');
+INSERT INTO `answers` VALUES ('629', '20', '223', '0', '');
+INSERT INTO `answers` VALUES ('630', '20', '224', '0', '');
+INSERT INTO `answers` VALUES ('631', '20', '225', '0', '');
+INSERT INTO `answers` VALUES ('632', '20', '226', '0', '');
+INSERT INTO `answers` VALUES ('633', '20', '227', '0', '');
 
 -- ----------------------------
 -- Table structure for assessments
@@ -254,33 +616,34 @@ CREATE TABLE `assessments` (
   `user_id` int DEFAULT NULL,
   `started_at` datetime DEFAULT NULL,
   `completed_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
   `score` float DEFAULT NULL,
   `risk_level` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `assessments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of assessments
 -- ----------------------------
-INSERT INTO `assessments` VALUES ('1', 'ทดสอบ', null, null, 'habusaya@gmail.com', '2', '2025-10-04 14:21:19', null, null, null);
-INSERT INTO `assessments` VALUES ('2', 'ทดสอบ', null, null, 'habusaya@gmail.com', '2', '2025-10-04 14:23:26', null, null, null);
-INSERT INTO `assessments` VALUES ('3', 'ทดสอบ', null, null, 'habusaya@gmail.com', '2', '2025-10-04 14:24:06', null, null, null);
-INSERT INTO `assessments` VALUES ('4', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-04 16:30:23', null, null, null);
-INSERT INTO `assessments` VALUES ('5', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 02:28:48', null, null, null);
-INSERT INTO `assessments` VALUES ('6', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 02:55:42', null, null, null);
-INSERT INTO `assessments` VALUES ('7', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 02:56:57', '2025-10-05 02:57:06', '1', 'แดง');
-INSERT INTO `assessments` VALUES ('8', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 03:01:15', null, null, null);
-INSERT INTO `assessments` VALUES ('9', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 03:04:24', '2025-10-05 03:04:28', '1', 'แดง');
-INSERT INTO `assessments` VALUES ('10', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 03:10:18', null, null, null);
-INSERT INTO `assessments` VALUES ('11', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 04:22:27', null, null, null);
-INSERT INTO `assessments` VALUES ('12', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 04:38:02', null, null, null);
-INSERT INTO `assessments` VALUES ('13', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 07:38:58', '2025-10-05 07:39:22', '1', 'แดง');
-INSERT INTO `assessments` VALUES ('14', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 08:11:11', '2025-10-05 08:11:27', '1.13', 'แดง');
-INSERT INTO `assessments` VALUES ('15', 'ทดสอบ', 'ทดสอบประเมิน', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 09:41:47', null, null, null);
-INSERT INTO `assessments` VALUES ('16', 'ทดสอบ', 'ทดสอบประเมิน', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 09:43:07', null, null, null);
-INSERT INTO `assessments` VALUES ('17', 'ทดสอบ', 'ทดสอบประเมิน', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 09:44:44', null, null, null);
+INSERT INTO `assessments` VALUES ('4', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-04 16:30:23', null, '2025-10-06 13:02:46', null, null);
+INSERT INTO `assessments` VALUES ('5', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 02:28:48', null, '2025-10-06 13:02:56', null, null);
+INSERT INTO `assessments` VALUES ('6', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 02:55:42', null, '2025-10-06 13:02:54', null, null);
+INSERT INTO `assessments` VALUES ('7', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 02:56:57', '2025-10-05 02:57:06', '2025-10-06 13:02:52', '1', 'แดง');
+INSERT INTO `assessments` VALUES ('8', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 03:01:15', null, '2025-10-06 13:02:51', null, null);
+INSERT INTO `assessments` VALUES ('9', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 03:04:24', '2025-10-05 03:04:28', '2025-10-06 13:02:49', '1', 'แดง');
+INSERT INTO `assessments` VALUES ('10', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 03:10:18', null, '2025-10-06 13:02:47', null, null);
+INSERT INTO `assessments` VALUES ('11', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 04:22:27', null, '2025-10-06 13:02:43', null, null);
+INSERT INTO `assessments` VALUES ('12', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 04:38:02', null, '2025-10-06 13:02:42', null, null);
+INSERT INTO `assessments` VALUES ('13', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 07:38:58', '2025-10-05 07:39:22', '2025-10-06 13:02:40', '1', 'แดง');
+INSERT INTO `assessments` VALUES ('14', 'ทดสอบ', 'sdsddsd', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 08:11:11', '2025-10-05 08:11:27', '2025-10-06 13:02:38', '1.13', 'แดง');
+INSERT INTO `assessments` VALUES ('15', 'ทดสอบ', 'ทดสอบประเมิน', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 09:41:47', null, '2025-10-06 13:02:37', null, null);
+INSERT INTO `assessments` VALUES ('16', 'ทดสอบ', 'ทดสอบประเมิน', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 09:43:07', null, '2025-10-06 13:02:34', null, null);
+INSERT INTO `assessments` VALUES ('17', 'ทดสอบ', 'ทดสอบประเมิน', 'CII', 'habusaya@gmail.com', '2', '2025-10-05 09:44:44', null, '2025-10-06 13:02:33', null, null);
+INSERT INTO `assessments` VALUES ('18', 'ทดสอบ1', 'ทดสอบประเมิน1', 'CII', 'habusaya@gmail.com', '2', '2025-10-06 09:29:48', '2025-10-06 09:36:20', '2025-10-06 13:02:31', '1.13', 'แดง');
+INSERT INTO `assessments` VALUES ('19', 'ทดสอบ', 'ทดสอบประเมิน', 'CII', 'habusaya@gmail.com', '5', '2025-10-06 13:03:15', '2025-10-06 13:30:46', null, '1.79', 'แดง');
+INSERT INTO `assessments` VALUES ('20', 'ทดสอบ', 'ทดสอบประเมิน', 'CII', 'habusaya@gmail.com', '2', '2025-10-07 02:13:54', '2025-10-07 02:14:51', null, '1.29', 'แดง');
 
 -- ----------------------------
 -- Table structure for categories
@@ -299,16 +662,6 @@ CREATE TABLE `categories` (
 -- ----------------------------
 -- Records of categories
 -- ----------------------------
-INSERT INTO `categories` VALUES ('1', 'BASIC', 'นโยบายพื้นฐาน', null, '1');
-INSERT INTO `categories` VALUES ('2', 'POLICY', 'นโยบายคุ้มครอง', null, '1');
-INSERT INTO `categories` VALUES ('3', 'CONSENT', 'การขอความยินยอม', null, '1');
-INSERT INTO `categories` VALUES ('4', 'PURPOSE', 'วัตถุประสงค์การใช้', null, '1');
-INSERT INTO `categories` VALUES ('5', 'SECURITY', 'ความมั่นคงปลอดภัย', null, '1');
-INSERT INTO `categories` VALUES ('6', 'ACCESS', 'การเข้าถึงข้อมูล', null, '1');
-INSERT INTO `categories` VALUES ('7', 'RECORD', 'การบันทึกข้อมูล', null, '1');
-INSERT INTO `categories` VALUES ('8', 'RIGHTS', 'สิทธิของเจ้าของข้อมูล', null, '1');
-INSERT INTO `categories` VALUES ('9', 'EMERGENCY', 'เหตุฉุกเฉิน', null, '1');
-INSERT INTO `categories` VALUES ('10', 'CONTRACT', 'สัญญา', null, '1');
 INSERT INTO `categories` VALUES ('3731', 'D1', 'หมวดหมู่ D1 : พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562', null, '1');
 INSERT INTO `categories` VALUES ('3762', 'D2', 'หมวดหมู่ D2 : นโยบายบริหารจัดการ ประกอบนโยบายและแผนปฏิบัติการว่าด้วยการรักษาความมั่นคงปลอดภัยไซเบอร์ (พ.ศ. 2560 - 2570)', null, '1');
 INSERT INTO `categories` VALUES ('3783', 'D3', 'หมวดหมู่ D3 : ประมวลแนวทางปฏิบัติและกรอบมาตรฐาน ด้านการรักษาความมั่นคงปลอดภัยไซเบอร์', null, '1');
@@ -436,11 +789,15 @@ CREATE TABLE `document_review_steps` (
   PRIMARY KEY (`id`),
   KEY `document_id` (`document_id`),
   CONSTRAINT `document_review_steps_ibfk_1` FOREIGN KEY (`document_id`) REFERENCES `documents` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of document_review_steps
 -- ----------------------------
+INSERT INTO `document_review_steps` VALUES ('2', '7', '1', 'PENDING', '', '2025-10-07 01:53:12');
+INSERT INTO `document_review_steps` VALUES ('3', '7', '1', 'PENDING', '', '2025-10-07 01:53:38');
+INSERT INTO `document_review_steps` VALUES ('4', '7', '5', 'PASS', '', '2025-10-07 02:11:36');
+INSERT INTO `document_review_steps` VALUES ('5', '10', '5', 'PASS', '', '2025-10-07 02:37:42');
 
 -- ----------------------------
 -- Table structure for documents
@@ -450,25 +807,37 @@ CREATE TABLE `documents` (
   `id` int NOT NULL AUTO_INCREMENT,
   `assessment_id` int NOT NULL,
   `category_id` int NOT NULL,
+  `question_id` int DEFAULT NULL,
   `original_name` varchar(255) DEFAULT NULL,
   `stored_name` varchar(255) DEFAULT NULL,
   `mime` varchar(255) DEFAULT NULL,
   `size` int DEFAULT NULL,
   `uploaded_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `reviewed_by` int DEFAULT NULL,
+  `reviewed_at` datetime DEFAULT NULL,
   `status` enum('PENDING','PASS','FAIL') DEFAULT 'PENDING',
   `notes` text,
   `reviewers` text,
+  `current_reviewer_idx` int DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `assessment_id` (`assessment_id`),
   KEY `category_id` (`category_id`),
   CONSTRAINT `documents_ibfk_1` FOREIGN KEY (`assessment_id`) REFERENCES `assessments` (`id`) ON DELETE CASCADE,
   CONSTRAINT `documents_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of documents
 -- ----------------------------
-INSERT INTO `documents` VALUES ('1', '3', '9', '6. ฟอร์มเล่มผลงานฉบับเต็ม _Full paper_.docx', 'doc_68e12e48c00ba_6._____________________________________________________________________Full_paper_.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '38977', '2025-10-04 14:25:12', 'FAIL', '', null);
+INSERT INTO `documents` VALUES ('2', '17', '3783', '155', 'คู่ฉบับขอใช้วิจัย .docx', 'doc_68e38b79d8a22_____________________________________________________.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '24865', '2025-10-06 09:27:21', null, null, 'PENDING', null, '[]', '0');
+INSERT INTO `documents` VALUES ('3', '18', '3731', '129', 'คู่ฉบับขอใช้วิจัย .docx', 'doc_68e38cd5b2e6f_____________________________________________________.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '24865', '2025-10-06 09:33:09', null, null, 'PENDING', null, '[]', '0');
+INSERT INTO `documents` VALUES ('4', '18', '3783', '157', '00_แนวทางสรุป_กำหนดตำแหน่งสายงานวิทยฯ69.docx', 'doc_68e38d61323ca_00_____________________________________________________________________________________________________69.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '30071', '2025-10-06 09:35:29', null, null, 'PENDING', null, '[]', '0');
+INSERT INTO `documents` VALUES ('5', '18', '3783', '160', 'แบบฟอร์ม_3_หนังสือรับรองการนำไปใช้.docx', 'doc_68e38d748c84a__________________________3______________________________________________________________________.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '35093', '2025-10-06 09:35:48', null, null, 'PENDING', null, '[]', '0');
+INSERT INTO `documents` VALUES ('6', '19', '3731', '129', 'แบบฟอร์ม_3_หนังสือรับรองการนำไปใช้.docx', 'doc_68e3c0daacfdc__________________________3______________________________________________________________________.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '35093', '2025-10-06 13:15:06', null, null, 'PENDING', null, '[]', '0');
+INSERT INTO `documents` VALUES ('7', '19', '3762', '143', 'แบบฟอร์ม_3_หนังสือรับรองการนำไปใช้.docx', 'doc_68e3c4599097a__________________________3______________________________________________________________________.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '35093', '2025-10-06 13:30:01', '5', '2025-10-07 02:11:36', 'PASS', null, '[5]', '0');
+INSERT INTO `documents` VALUES ('8', '20', '3731', '129', 'แบบฟอร์ม_3_หนังสือรับรองการนำไปใช้.docx', 'doc_68e47771193ab__________________________3______________________________________________________________________.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '35093', '2025-10-07 02:14:09', null, null, 'PENDING', null, null, '0');
+INSERT INTO `documents` VALUES ('9', '20', '3731', '130', 'แบบฟอร์ม_2_แบบบรรยายลักษณะงาน(JD).docx', 'doc_68e4777678f8c__________________________2________________________________________________________JD_.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '23317', '2025-10-07 02:14:14', null, null, 'PENDING', null, null, '0');
+INSERT INTO `documents` VALUES ('10', '20', '3731', '131', '00_แนวทางสรุป_กำหนดตำแหน่งสายงานวิทยฯ69.docx', 'doc_68e477855403b_00_____________________________________________________________________________________________________69.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '30071', '2025-10-07 02:14:29', '5', '2025-10-07 02:37:42', 'PASS', null, '[5]', '0');
 
 -- ----------------------------
 -- Table structure for log
@@ -481,12 +850,83 @@ CREATE TABLE `log` (
   `details` text,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of log
 -- ----------------------------
 INSERT INTO `log` VALUES ('1', '2', 'document_review', 'Reviewed document ID 1, status: FAIL', '2025-10-04 14:39:42');
+INSERT INTO `log` VALUES ('2', '1', 'assign_role', 'Set role of user #7 to reviewer', '2025-10-06 09:22:18');
+INSERT INTO `log` VALUES ('3', '1', 'assign_role', 'Set role of user #7 to reviewer', '2025-10-06 09:22:21');
+INSERT INTO `log` VALUES ('4', '1', 'assign_role', 'Set role of user #7 to reviewer', '2025-10-06 09:25:22');
+INSERT INTO `log` VALUES ('5', '1', 'assessment_delete', 'Delete assessment #1', '2025-10-06 09:44:55');
+INSERT INTO `log` VALUES ('6', '1', 'assessment_delete', 'Delete assessment #2', '2025-10-06 09:44:59');
+INSERT INTO `log` VALUES ('7', '1', 'assessment_delete', 'Delete assessment #3', '2025-10-06 09:45:02');
+INSERT INTO `log` VALUES ('8', '1', 'assign_reviewer', 'Assign reviewer #5 to document #5', '2025-10-06 09:46:01');
+INSERT INTO `log` VALUES ('9', '1', 'assign_reviewer', 'Assign reviewer #5 to document #4', '2025-10-06 09:46:08');
+INSERT INTO `log` VALUES ('10', '1', 'assign_reviewer', 'Assign reviewer #5 to document #3', '2025-10-06 09:50:46');
+INSERT INTO `log` VALUES ('11', '1', 'assign_reviewer', 'Assign reviewer #5 to document #2', '2025-10-06 09:50:54');
+INSERT INTO `log` VALUES ('12', '1', 'assessment_delete', 'Soft delete assessment #18', '2025-10-06 13:02:31');
+INSERT INTO `log` VALUES ('13', '1', 'assessment_delete', 'Soft delete assessment #17', '2025-10-06 13:02:33');
+INSERT INTO `log` VALUES ('14', '1', 'assessment_delete', 'Soft delete assessment #16', '2025-10-06 13:02:34');
+INSERT INTO `log` VALUES ('15', '1', 'assessment_delete', 'Soft delete assessment #15', '2025-10-06 13:02:37');
+INSERT INTO `log` VALUES ('16', '1', 'assessment_delete', 'Soft delete assessment #14', '2025-10-06 13:02:38');
+INSERT INTO `log` VALUES ('17', '1', 'assessment_delete', 'Soft delete assessment #13', '2025-10-06 13:02:40');
+INSERT INTO `log` VALUES ('18', '1', 'assessment_delete', 'Soft delete assessment #12', '2025-10-06 13:02:42');
+INSERT INTO `log` VALUES ('19', '1', 'assessment_delete', 'Soft delete assessment #11', '2025-10-06 13:02:43');
+INSERT INTO `log` VALUES ('20', '1', 'assessment_delete', 'Soft delete assessment #4', '2025-10-06 13:02:46');
+INSERT INTO `log` VALUES ('21', '1', 'assessment_delete', 'Soft delete assessment #10', '2025-10-06 13:02:47');
+INSERT INTO `log` VALUES ('22', '1', 'assessment_delete', 'Soft delete assessment #9', '2025-10-06 13:02:49');
+INSERT INTO `log` VALUES ('23', '1', 'assessment_delete', 'Soft delete assessment #8', '2025-10-06 13:02:51');
+INSERT INTO `log` VALUES ('24', '1', 'assessment_delete', 'Soft delete assessment #7', '2025-10-06 13:02:52');
+INSERT INTO `log` VALUES ('25', '1', 'assessment_delete', 'Soft delete assessment #6', '2025-10-06 13:02:54');
+INSERT INTO `log` VALUES ('26', '1', 'assessment_delete', 'Soft delete assessment #5', '2025-10-06 13:02:56');
+INSERT INTO `log` VALUES ('27', '1', 'remove_reviewer', 'Remove reviewer #7 from document #2', '2025-10-06 13:47:23');
+INSERT INTO `log` VALUES ('28', '1', 'assign_reviewer', 'Assign reviewer #7 to document #2', '2025-10-06 13:47:37');
+INSERT INTO `log` VALUES ('29', '1', 'remove_reviewer', 'Remove reviewer #7 from document #2', '2025-10-06 13:47:41');
+INSERT INTO `log` VALUES ('30', '1', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-06 13:47:49');
+INSERT INTO `log` VALUES ('31', '1', 'assign_reviewer', 'Assign reviewer #5 to document #6', '2025-10-06 13:47:53');
+INSERT INTO `log` VALUES ('32', '1', 'assign_reviewer', 'Assign reviewer #5 to document #5', '2025-10-06 13:48:03');
+INSERT INTO `log` VALUES ('33', '1', 'assign_reviewer', 'Assign reviewer #6 to document #4', '2025-10-06 13:48:08');
+INSERT INTO `log` VALUES ('34', '1', 'assign_reviewer', 'Assign reviewer #6 to document #3', '2025-10-06 13:48:13');
+INSERT INTO `log` VALUES ('35', '1', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-06 14:13:18');
+INSERT INTO `log` VALUES ('36', '1', 'remove_reviewer', 'Remove reviewer #5 from document #7', '2025-10-06 14:46:18');
+INSERT INTO `log` VALUES ('37', '1', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-06 14:46:22');
+INSERT INTO `log` VALUES ('38', '5', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-06 14:46:39');
+INSERT INTO `log` VALUES ('39', '5', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-06 14:46:42');
+INSERT INTO `log` VALUES ('40', '5', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-06 14:46:43');
+INSERT INTO `log` VALUES ('41', '5', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-06 14:46:44');
+INSERT INTO `log` VALUES ('42', '5', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-06 14:47:04');
+INSERT INTO `log` VALUES ('43', '5', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-06 14:47:06');
+INSERT INTO `log` VALUES ('44', '5', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-06 14:49:40');
+INSERT INTO `log` VALUES ('45', '5', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-06 14:49:43');
+INSERT INTO `log` VALUES ('46', '5', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-06 14:49:45');
+INSERT INTO `log` VALUES ('47', '5', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-06 14:49:46');
+INSERT INTO `log` VALUES ('48', '5', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-06 14:49:47');
+INSERT INTO `log` VALUES ('49', '5', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-06 14:56:25');
+INSERT INTO `log` VALUES ('50', '1', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-06 14:57:04');
+INSERT INTO `log` VALUES ('51', '1', 'assign_reviewer', 'Assign reviewer #5 to document #6', '2025-10-06 14:57:08');
+INSERT INTO `log` VALUES ('52', '1', 'assign_reviewer', 'Assign reviewer #5 to document #5', '2025-10-06 14:57:13');
+INSERT INTO `log` VALUES ('53', '1', 'assign_reviewer', 'Assign reviewer #5 to document #4', '2025-10-06 14:57:17');
+INSERT INTO `log` VALUES ('54', '1', 'assign_reviewer', 'Assign reviewer #5 to document #3', '2025-10-06 14:57:22');
+INSERT INTO `log` VALUES ('55', '1', 'remove_reviewer', 'Remove reviewer #6 from document #3', '2025-10-06 14:57:30');
+INSERT INTO `log` VALUES ('56', '1', 'remove_reviewer', 'Remove reviewer #6 from document #4', '2025-10-06 14:57:34');
+INSERT INTO `log` VALUES ('57', '1', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-06 15:03:32');
+INSERT INTO `log` VALUES ('58', '1', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-07 01:51:19');
+INSERT INTO `log` VALUES ('59', '1', 'document_review', 'Reviewed document ID 7, status: PENDING', '2025-10-07 01:53:12');
+INSERT INTO `log` VALUES ('60', '1', 'document_review', 'Reviewed document ID 7, status: PENDING', '2025-10-07 01:53:38');
+INSERT INTO `log` VALUES ('61', '1', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-07 01:56:05');
+INSERT INTO `log` VALUES ('62', '5', 'assign_reviewer', 'Assign reviewer #5 to document #7', '2025-10-07 02:09:10');
+INSERT INTO `log` VALUES ('63', '5', 'document_review', 'Reviewed document ID 7, status: PASS', '2025-10-07 02:11:36');
+INSERT INTO `log` VALUES ('64', '1', 'assign_reviewer', 'Assign reviewer #5 to document #10', '2025-10-07 02:37:11');
+INSERT INTO `log` VALUES ('65', '5', 'document_review', 'Reviewed document ID 10, status: PASS', '2025-10-07 02:37:42');
+INSERT INTO `log` VALUES ('66', '1', 'assign_role', 'Set role of user #7 to reviewer', '2025-10-07 02:53:17');
+INSERT INTO `log` VALUES ('67', '1', 'assign_role', 'Set role of user #8 to evaluator', '2025-10-07 02:53:22');
+INSERT INTO `log` VALUES ('68', '1', 'assign_role', 'Set role of user #7 to reviewer', '2025-10-07 02:53:26');
+INSERT INTO `log` VALUES ('69', '1', 'assign_role', 'Set role of user #6 to reviewer', '2025-10-07 02:53:29');
+INSERT INTO `log` VALUES ('70', '1', 'assign_role', 'Set role of user #5 to reviewer', '2025-10-07 02:53:31');
+INSERT INTO `log` VALUES ('71', '1', 'assign_role', 'Set role of user #6 to reviewer', '2025-10-07 02:53:32');
+INSERT INTO `log` VALUES ('72', '1', 'assign_role', 'Set role of user #6 to reviewer', '2025-10-07 02:53:33');
 
 -- ----------------------------
 -- Table structure for notifications
@@ -495,18 +935,34 @@ DROP TABLE IF EXISTS `notifications`;
 CREATE TABLE `notifications` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
+  `document_id` int DEFAULT NULL,
   `message` text NOT NULL,
+  `event_type` varchar(50) DEFAULT NULL,
   `is_read` tinyint(1) DEFAULT '0',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of notifications
 -- ----------------------------
-INSERT INTO `notifications` VALUES ('1', '2', 'เอกสาร \'6. ฟอร์มเล่มผลงานฉบับเต็ม _Full paper_.docx\' ในหมวด \'เหตุฉุกเฉิน\' ได้รับการตรวจสอบแล้ว สถานะ: FAIL', '1', '2025-10-04 14:39:42');
+INSERT INTO `notifications` VALUES ('2', '7', null, 'คุณได้รับมอบหมายให้ตรวจเอกสาร \'คู่ฉบับขอใช้วิจัย .docx\' กรุณาเข้าระบบเพื่อรับงาน', null, '0', '2025-10-06 13:47:37');
+INSERT INTO `notifications` VALUES ('3', '5', null, 'คุณได้รับมอบหมายให้ตรวจเอกสาร \'แบบฟอร์ม_3_หนังสือรับรองการนำไปใช้.docx\' กรุณาเข้าระบบเพื่อรับงาน', null, '0', '2025-10-06 13:47:49');
+INSERT INTO `notifications` VALUES ('4', '5', null, 'คุณได้รับมอบหมายให้ตรวจเอกสาร \'แบบฟอร์ม_3_หนังสือรับรองการนำไปใช้.docx\' กรุณาเข้าระบบเพื่อรับงาน', null, '0', '2025-10-06 13:47:53');
+INSERT INTO `notifications` VALUES ('5', '5', null, 'คุณได้รับมอบหมายให้ตรวจเอกสาร \'แบบฟอร์ม_3_หนังสือรับรองการนำไปใช้.docx\' กรุณาเข้าระบบเพื่อรับงาน', null, '0', '2025-10-06 13:48:03');
+INSERT INTO `notifications` VALUES ('6', '6', null, 'คุณได้รับมอบหมายให้ตรวจเอกสาร \'00_แนวทางสรุป_กำหนดตำแหน่งสายงานวิทยฯ69.docx\' กรุณาเข้าระบบเพื่อรับงาน', null, '0', '2025-10-06 13:48:08');
+INSERT INTO `notifications` VALUES ('7', '6', null, 'คุณได้รับมอบหมายให้ตรวจเอกสาร \'คู่ฉบับขอใช้วิจัย .docx\' กรุณาเข้าระบบเพื่อรับงาน', null, '0', '2025-10-06 13:48:13');
+INSERT INTO `notifications` VALUES ('8', '5', null, 'คุณได้รับมอบหมายให้ตรวจเอกสาร #7 \'แบบฟอร์ม_3_หนังสือรับรองการนำไปใช้.docx\' กรุณาเข้าระบบเพื่อรับงาน', null, '1', '2025-10-06 14:46:22');
+INSERT INTO `notifications` VALUES ('9', '5', null, 'คุณได้รับมอบหมายให้ตรวจเอกสาร #4 \'00_แนวทางสรุป_กำหนดตำแหน่งสายงานวิทยฯ69.docx\' กรุณาเข้าระบบเพื่อรับงาน', null, '1', '2025-10-06 14:57:17');
+INSERT INTO `notifications` VALUES ('10', '5', null, 'คุณได้รับมอบหมายให้ตรวจเอกสาร #3 \'คู่ฉบับขอใช้วิจัย .docx\' กรุณาเข้าระบบเพื่อรับงาน', null, '1', '2025-10-06 14:57:22');
+INSERT INTO `notifications` VALUES ('11', '5', null, 'เอกสาร \'แบบฟอร์ม_3_หนังสือรับรองการนำไปใช้.docx\' ในหมวด \'หมวดหมู่ D2 : นโยบายบริหารจัดการ ประกอบนโยบายและแผนปฏิบัติการว่าด้วยการรักษาความมั่นคงปลอดภัยไซเบอร์ (พ.ศ. 2560 - 2570)\' ได้รับการตรวจสอบแล้ว สถานะ: รอตรวจสอบ', null, '0', '2025-10-07 01:53:12');
+INSERT INTO `notifications` VALUES ('12', '5', null, 'เอกสาร \'แบบฟอร์ม_3_หนังสือรับรองการนำไปใช้.docx\' ในหมวด \'หมวดหมู่ D2 : นโยบายบริหารจัดการ ประกอบนโยบายและแผนปฏิบัติการว่าด้วยการรักษาความมั่นคงปลอดภัยไซเบอร์ (พ.ศ. 2560 - 2570)\' ได้รับการตรวจสอบแล้ว สถานะ: รอตรวจสอบ', null, '0', '2025-10-07 01:53:38');
+INSERT INTO `notifications` VALUES ('13', '5', null, 'คุณได้รับมอบหมายให้ตรวจเอกสาร #7 \'แบบฟอร์ม_3_หนังสือรับรองการนำไปใช้.docx\' กรุณาเข้าระบบเพื่อรับงาน', null, '1', '2025-10-07 02:09:10');
+INSERT INTO `notifications` VALUES ('14', '5', null, 'เอกสาร \'แบบฟอร์ม_3_หนังสือรับรองการนำไปใช้.docx\' ในหมวด \'หมวดหมู่ D2 : นโยบายบริหารจัดการ ประกอบนโยบายและแผนปฏิบัติการว่าด้วยการรักษาความมั่นคงปลอดภัยไซเบอร์ (พ.ศ. 2560 - 2570)\' ได้รับการตรวจสอบแล้ว สถานะ: อนุมัติ', null, '0', '2025-10-07 02:11:36');
+INSERT INTO `notifications` VALUES ('15', '5', '10', 'คุณได้รับมอบหมายให้ตรวจเอกสาร #10 \'00_แนวทางสรุป_กำหนดตำแหน่งสายงานวิทยฯ69.docx\' กรุณาเข้าระบบเพื่อรับงาน', 'doc_assigned', '1', '2025-10-07 02:37:11');
+INSERT INTO `notifications` VALUES ('16', '2', '10', 'เอกสาร \'00_แนวทางสรุป_กำหนดตำแหน่งสายงานวิทยฯ69.docx\' ในหมวด \'หมวดหมู่ D1 : พระราชบัญญัติการรักษาความมั่นคงปลอดภัยไซเบอร์ พ.ศ. 2562\' ได้รับการตรวจสอบแล้ว สถานะ: อนุมัติ', 'doc_reviewed', '0', '2025-10-07 02:37:42');
 
 -- ----------------------------
 -- Table structure for questions
@@ -628,6 +1084,35 @@ INSERT INTO `questions` VALUES ('226', 'D3-97', 'มีการจัดทำ�
 INSERT INTO `questions` VALUES ('227', 'D3-98', 'มีการฝึกซ้อม BCP อย่างน้อยปีละ 1 ครั้ง เพื่อทดสอบแผน\nเตรียมความพร้อมต่อสภาวะวิกฤตและพัฒนาปรับปรุงแผน\nให้มีประสิทธิภาพ', 'หมวดหมู่ D3 : ประมวลแนวทางปฏิบัติและกรอบมาตรฐาน ด้านการรักษาความมั่นคงปลอดภัยไซเบอร์', '3783', '2');
 
 -- ----------------------------
+-- Table structure for role_assignments
+-- ----------------------------
+DROP TABLE IF EXISTS `role_assignments`;
+CREATE TABLE `role_assignments` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `role` enum('evaluator','reviewer','admin') NOT NULL,
+  `assigned_by` int DEFAULT NULL,
+  `assigned_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `role_assignments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of role_assignments
+-- ----------------------------
+INSERT INTO `role_assignments` VALUES ('1', '7', 'reviewer', '1', '2025-10-06 09:22:18');
+INSERT INTO `role_assignments` VALUES ('2', '7', 'reviewer', '1', '2025-10-06 09:22:21');
+INSERT INTO `role_assignments` VALUES ('3', '7', 'reviewer', '1', '2025-10-06 09:25:22');
+INSERT INTO `role_assignments` VALUES ('4', '7', 'reviewer', '1', '2025-10-07 02:53:17');
+INSERT INTO `role_assignments` VALUES ('5', '8', 'evaluator', '1', '2025-10-07 02:53:22');
+INSERT INTO `role_assignments` VALUES ('6', '7', 'reviewer', '1', '2025-10-07 02:53:26');
+INSERT INTO `role_assignments` VALUES ('7', '6', 'reviewer', '1', '2025-10-07 02:53:29');
+INSERT INTO `role_assignments` VALUES ('8', '5', 'reviewer', '1', '2025-10-07 02:53:31');
+INSERT INTO `role_assignments` VALUES ('9', '6', 'reviewer', '1', '2025-10-07 02:53:32');
+INSERT INTO `role_assignments` VALUES ('10', '6', 'reviewer', '1', '2025-10-07 02:53:33');
+
+-- ----------------------------
 -- Table structure for settings
 -- ----------------------------
 DROP TABLE IF EXISTS `settings`;
@@ -654,15 +1139,20 @@ CREATE TABLE `users` (
   `username` varchar(100) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password_hash` varchar(255) NOT NULL,
-  `role` enum('user','admin','reviewer','evaluator') DEFAULT 'user',
+  `role` enum('evaluator','reviewer','admin') NOT NULL DEFAULT 'evaluator',
+  `allowed_pages` text,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'admin', 'admin@example.com', '$2y$10$4uQnr.DydZj/XFca7PgPGuoUdmsmN4DOVLeBT12ioGSxsankdpC.C', 'admin', '2025-10-04 10:27:38');
-INSERT INTO `users` VALUES ('2', 'test', 'habusaya@gmail.com', '$2y$10$fZH6bHEavKAlO360IcFqzOt02i7tCnM1o/EoZlXisyCw9Ln021DwO', 'user', '2025-10-04 14:20:49');
+INSERT INTO `users` VALUES ('1', 'admin', 'admin@example.com', '$2y$10$4uQnr.DydZj/XFca7PgPGuoUdmsmN4DOVLeBT12ioGSxsankdpC.C', 'admin', null, '2025-10-04 10:27:38');
+INSERT INTO `users` VALUES ('2', 'test', 'habusaya@gmail.com', '$2y$10$fZH6bHEavKAlO360IcFqzOt02i7tCnM1o/EoZlXisyCw9Ln021DwO', 'evaluator', null, '2025-10-04 14:20:49');
+INSERT INTO `users` VALUES ('5', 'reviewer1', 'reviewer1@example.com', '$2y$10$dQTk.cOLHi/Twkb9WvgwV.XQ3YCiT.XdsbiVvb6gupAQ5QuQe5jTC', 'reviewer', null, '2025-10-06 04:31:42');
+INSERT INTO `users` VALUES ('6', 'reviewer2', 'reviewer2@example.com', '$2y$10$uOHz9lztdUVRcJAahQ7C5uHMWlWQhIO19S8qs4mi/rRCaD0TxJiV2', 'reviewer', null, '2025-10-06 04:31:42');
+INSERT INTO `users` VALUES ('7', 'chief_reviewer', 'chief@example.com', '$2y$10$XxEROmT4E2U8RbAMWRlYtOW7igAQJMOHwvyf6pGibBw7gBvNwK0KK', 'reviewer', null, '2025-10-06 04:31:42');
+INSERT INTO `users` VALUES ('8', 'mdo', 'mdo@moph.go.th', '$2y$10$oZ1AogDiVCMfupyEWv7Ao.VqSTXfx1LX3b/U93IZnfeUb9Wa6avg2', 'evaluator', null, '2025-10-06 14:16:09');

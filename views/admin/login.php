@@ -1,3 +1,4 @@
+<?php include __DIR__.'/../header.php'; ?>
 <form method="post" action="?a=admin_login_submit" class="card">
   <h2>เข้าสู่ระบบผู้ดูแล</h2>
   <?php if (!empty($error)): ?><p style="color:#ef4444;"><?= htmlspecialchars($error) ?></p><?php endif; ?>
@@ -9,3 +10,4 @@
     <a class="btn" href="?">กลับหน้าหลัก</a>
   </div>
 </form>
+<?php include __DIR__.'/../footer.php'; ?>

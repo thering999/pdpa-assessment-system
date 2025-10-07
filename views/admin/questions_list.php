@@ -1,3 +1,4 @@
+<?php include __DIR__.'/../header.php'; ?>
 <section class="card">
   <h2>จัดการคำถาม</h2>
   <?php if (!empty($flash)): ?><p style="color:#2dd4bf;"><?= htmlspecialchars($flash) ?></p><?php endif; ?>
@@ -37,3 +38,4 @@
       <?php endforeach; ?>
     </tbody>
   </table>
+<?php include __DIR__.'/../footer.php'; ?>
