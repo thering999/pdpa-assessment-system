@@ -1,67 +1,156 @@
-# PDPA Self Assessment System
+# PDPA Self Assessment System for CII
+# ระบบประเมิน PDPA (PHP + MySQL)
 
-ระบบประเมินตนเอง PDPA สำหรับหน่วยงานโครงสร้างพื้นฐานสำคัญ (CII)
-รองรับการประเมิน, แนบเอกสาร, ตรวจสอบหลายขั้นตอน, แจ้งเตือน, และจัดการสิทธิ์แบบครบวงจร
+## 📋 ภาพรวมระบบ
+ระบบประเมินตนเอง PDPA สำหรับหน่วยงานโครงสร้างพื้นฐานสำคัญ (CII) ใช้ PHP (PDO), MySQL, Docker ไม่ใช้เฟรมเวิร์ก ติดตั้งง่าย ใช้งานเร็ว
 
-## ฟีเจอร์หลัก
-- แบบประเมิน Self-Assessment พร้อมคำนวณคะแนนและระดับความเสี่ยง
-- แนบไฟล์หลักฐานแยกแต่ละข้อ
-- Reviewer Workflow: มอบหมาย, รับงาน, ตรวจสอบ, แจ้งผล
-- Admin Dashboard: จัดการผู้ใช้, เอกสาร, สิทธิ์, ส่งออก/นำเข้า
-- ระบบแจ้งเตือน (Notification) พร้อม Action ในกล่องแจ้งเตือน
-- Audit Trail & Timeline
-- ส่งออก Excel/PDF
+---
 
-## การติดตั้ง
+## 🛠️ ขั้นตอนการติดตั้ง
 1. ติดตั้ง Docker และ Git
-2. Clone repo:
+2. ดาวน์โหลดโปรเจกต์
    ```bash
    git clone https://github.com/thering999/pdpa-assessment-system.git
    cd pdpa-assessment-system
    ```
-3. สั่งรัน:
+3. สั่งรันระบบ
    ```bash
    docker compose up -d --build
    ```
-4. เปิดใช้งานที่ `http://localhost:8080`
+4. เปิดเว็บเบราว์เซอร์ไปที่ `http://localhost:8080`
 
-## ตัวอย่างบัญชีผู้ใช้
-- **Admin**: admin / admin1234
-- **Reviewer**: reviewer1 / password123
-- **Evaluator**: evaluator1 / password123
+---
 
-## Flow การใช้งาน
-- Evaluator: ทำแบบประเมิน, แนบไฟล์, ดูผล/เปรียบเทียบ
-- Reviewer: รับงานจากแจ้งเตือนหรือหน้า Reviewer, ตรวจสอบ, อนุมัติ/ไม่อนุมัติ, ใส่ความเห็น
-- Admin: มอบหมาย reviewer, จัดการผู้ใช้, ดูสถิติ, ส่งออก/นำเข้า
+## 🚪 ขั้นตอนการเข้าใช้งาน
+1. เปิดหน้าเว็บ `http://localhost:8080`
+2. เข้าสู่ระบบด้วยบัญชีตัวอย่าง (หรือสมัครใหม่)
+   - Admin: admin / admin1234
+   - Reviewer: reviewer1 / password123
+   - Evaluator: evaluator1 / password123
+3. เลือกเมนูตามสิทธิ์ (ประเมิน, ตรวจสอบ, จัดการ)
 
-## อัปเดตล่าสุด (ต.ค. 2025)
-- Reviewer Inbox แบบอีเมล: รับงาน/ไม่รับงานจากแจ้งเตือน
-- Action ในแจ้งเตือนทำงานจริง (doc_id, reviewer_id, form_token)
-- Admin เห็นเอกสารทุกสถานะ, Reviewer เห็นเฉพาะคิวตัวเอง
-- ปรับ UI/UX: สีสถานะ, ตาราง, ปุ่ม, กล่องแจ้งเตือน, sidebar
+---
 
-## วิธีอัปโหลด/Deploy
-1. แก้ไขโค้ดตามต้องการ
-2. git add . && git commit -m "update"
-3. git push origin main
-4. ระบบ production ใช้ Docker Compose เช่นเดียวกับ dev
+## 📝 ขั้นตอนการทำงาน
+### สำหรับ Evaluator
+1. เริ่มทำแบบประเมิน (หน้าแรก)
+2. ตอบคำถามแต่ละข้อ
+3. แนบไฟล์หลักฐาน
+4. บันทึกหมายเหตุ/รายละเอียด
+5. ดูผลคะแนนและระดับความเสี่ยง
+6. ดาวน์โหลดรายงาน Excel/PDF
 
-## โครงสร้างไฟล์
-```
-PDPA/
-├── views/
-│   ├── admin/          # หน้าจอสำหรับ Admin
-│   ├── reviewer/       # หน้าจอสำหรับ Reviewer
-│   ├── history.php     # ประวัติการประเมิน
-│   ├── dashboard.php   # แดชบอร์ด
-│   └── notifications.php # การแจ้งเตือน
-├── assets/             # CSS, JS, Images
-├── db.php             # ฟังก์ชันฐานข้อมูล
-├── index.php          # Controller หลัก
-└── docker-compose.yml # การตั้งค่า Docker
-```
+### สำหรับ Reviewer
+1. รับงานจากแจ้งเตือนหรือหน้า Reviewer
+2. ตรวจสอบเอกสาร/หลักฐาน
+3. อนุมัติ/ไม่อนุมัติ/ให้ความเห็น
+4. ติดตามสถานะงานในคิว
+
+### สำหรับ Admin
+1. มอบหมาย reviewer ให้เอกสาร
+2. จัดการผู้ใช้/สิทธิ์
+3. ดูสถิติ/แดชบอร์ด
+4. ส่งออก/นำเข้าข้อมูล
+
+---
+
+## 🐛 ขั้นตอนการแก้ปัญหา
+1. **Database ไม่เชื่อมต่อ**
+   - ตรวจสอบว่า Docker container ของ MySQL และ web ทำงานอยู่
+   - ตรวจสอบไฟล์ .env และ environment variables
+2. **เข้าใช้งานไม่ได้/Permission Denied**
+   - ตรวจสอบสิทธิ์ผู้ใช้ (Admin/Reviewer/Evaluator)
+   - ล็อกอินใหม่หรือรีเฟรชหน้า
+3. **Import/Export ไม่สำเร็จ**
+   - ตรวจสอบรูปแบบไฟล์ CSV/XLSX
+   - ดู error log ใน Docker (`docker compose logs web`)
+4. **ระบบไม่แสดงผล/bug**
+   - รีสตาร์ท container (`docker compose restart`)
+   - ตรวจสอบ log และแจ้งทีมพัฒนา
+
+---
 
 ## ติดต่อทีมพัฒนา
 **พัฒนาโดย**: ทีม PDPA Development
 **อัปเดตล่าสุด**: ตุลาคม 2025
+
+---
+
+## 🧑‍💻 ตัวอย่างการใช้งานจริง
+### ตัวอย่างการนำเข้าไฟล์ Excel/CVS
+1. ไปที่เมนู Admin > นำเข้า XLSX หรือ CSV
+2. เลือกไฟล์ที่มีหัวคอลัมน์ตามตัวอย่าง (ดูไฟล์ตัวอย่างในโฟลเดอร์โปรเจกต์)
+3. กด "อัปโหลดและนำเข้า" ระบบจะแสดงผลลัพธ์
+
+### ตัวอย่างการ Export ผลประเมิน
+1. ไปที่หน้าสรุปผล (Result/Dashboard)
+2. กดปุ่ม "Export Excel" หรือ "Export PDF" เพื่อดาวน์โหลด
+
+### ตัวอย่างการเปลี่ยนสิทธิ์ผู้ใช้
+1. ไปที่ Admin > จัดการผู้ใช้
+2. กด "อัพเดท" เพื่อเปลี่ยนบทบาท (evaluator, reviewer, admin)
+
+---
+
+## ❓ FAQ คำถามที่พบบ่อย
+**Q: วิธีเริ่มต้นใช้งานระบบ?**  
+A: ดูหัวข้อ "ขั้นตอนการติดตั้ง" ด้านบน
+
+**Q: วิธีนำเข้า/ส่งออกข้อมูล?**  
+A: ใช้เมนู Admin > นำเข้า/ส่งออก (รองรับ CSV/XLSX/Excel/PDF)
+
+**Q: ลืมรหัสผ่าน/รีเซ็ต?**  
+A: กด "ลืมรหัสผ่าน" ที่หน้า Login หรือแจ้งแอดมิน
+
+**Q: ติดต่อ support ได้อย่างไร?**  
+A: ดูข้อมูลติดต่อใน README หรือหน้าแรกของระบบ
+
+**Q: วิธีดู audit log?**  
+A: เฉพาะ admin: ไปที่ Admin > Audit Log
+
+**Q: การใช้งาน REST API?**  
+A: ดูเอกสารที่ /api/docs (ถ้ามี) หรือสอบถามแอดมิน
+
+---
+
+## 📁 โครงสร้างไฟล์โปรเจกต์
+```
+PDPA/
+├── docker-compose.yml
+├── Dockerfile
+├── composer.json
+├── config.php
+├── pdpa_system.sql
+├── assets/
+│   ├── style.css, app.js, logo_moph.png
+├── uploads/           # ไฟล์ที่ผู้ใช้แนบ
+├── tmp/               # ไฟล์ชั่วคราว/รายงาน
+├── views/             # ไฟล์ PHP สำหรับแต่ละหน้า (admin, reviewer, auth, ...)
+│   ├── admin/
+│   ├── reviewer/
+│   ├── auth/
+├── index.php          # Entry point
+└── ...
+```
+
+---
+
+## 🔒 Security Tips
+- เปลี่ยนรหัสผ่าน admin หลังติดตั้ง
+- จำกัดสิทธิ์ผู้ใช้ตามบทบาท (Permission Matrix)
+- ตรวจสอบ audit log เป็นประจำ
+- อัปเดต Docker/Composer dependencies สม่ำเสมอ
+- ไม่ควรเปิด public uploads โดยตรง
+
+---
+
+## 📝 Changelog
+- 2025-10-07: เพิ่มคู่มือ, ตัวอย่าง, FAQ, Security, โครงสร้างไฟล์
+- 2025-09-30: เพิ่มระบบ reviewer queue, notification, import/export
+- 2025-09-15: ปรับ UI/UX, dark mode, audit log, autosave
+- 2025-09-01: สร้างระบบประเมิน PDPA (PHP/MySQL/Docker)
+
+---
+
+## 📄 License
+This project is licensed under the MIT License. See LICENSE file for details.
